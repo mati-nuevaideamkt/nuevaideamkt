@@ -127,8 +127,8 @@
     .hero-content { position: relative; z-index: 1; max-width: 800px; }
     .hero-badge { margin-bottom: 28px; }
     .hero-title {
-      font-family: var(--font-alt); font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 700; line-height: 1.05; letter-spacing: -.03em; margin-bottom: 24px;
+      font-family: var(--font-brand); font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 600; line-height: 1.05; letter-spacing: -.03em; margin-bottom: 24px;
     }
     .hero-title .highlight { color: var(--accent); position: relative; }
     .hero-title .highlight::after {
@@ -149,18 +149,22 @@
 
     /* ── MARQUEE CLIENTES ── */
     .marquee-section {
-      padding: 48px 0; background: #ffffff; overflow: hidden;
+      padding: 48px 0; border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); overflow: hidden;
     }
-    .marquee-label { text-align: center; font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #888; margin-bottom: 28px; }
+    .marquee-label { text-align: center; font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 28px; }
     .marquee-wrapper { overflow: hidden; }
-    .marquee-track { display: flex; gap: 48px; animation: marquee 30s linear infinite; width: max-content; align-items: center; }
+    .marquee-track { display: flex; gap: 20px; animation: marquee 35s linear infinite; width: max-content; align-items: center; }
     .marquee-track.reverse { animation-direction: reverse; }
-    .marquee-logo {
-      height: 44px; width: auto; max-width: 140px; object-fit: contain;
-      opacity: .85; transition: opacity var(--transition);
-      flex-shrink: 0;
+    .client-badge {
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,.92); border-radius: var(--radius-sm);
+      padding: 10px 16px; height: 72px; width: 164px;
+      transition: transform var(--transition), box-shadow var(--transition);
+      flex-shrink: 0; overflow: hidden;
     }
-    .marquee-logo:hover { opacity: 1; }
+    .client-badge:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .client-badge img { width: 100%; height: 100%; object-fit: contain; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* ── MARQUEE CERTIFICACIONES ── */
@@ -489,20 +493,20 @@
     <p class="marquee-label">Empresas que confiaron en nosotros</p>
     <div class="marquee-wrapper">
       <div class="marquee-track">
-        <img src="assets/clients/open25hs.png"      alt="Open 25 HS" class="marquee-logo" />
-        <img src="assets/clients/caece.png"          alt="Universidad CAECE" class="marquee-logo" />
-        <img src="assets/clients/emovere.png"        alt="Emovere" class="marquee-logo" />
-        <img src="assets/clients/generalcandies.png" alt="General Candies" class="marquee-logo" />
-        <img src="assets/clients/warp.png"           alt="Warp Estudios" class="marquee-logo" />
-        <img src="assets/clients/gorriti.png"        alt="Gorriti Art Center" class="marquee-logo" />
-        <img src="assets/clients/zittana.png"        alt="Zittana Textil" class="marquee-logo" />
-        <img src="assets/clients/open25hs.png"      alt="Open 25 HS" class="marquee-logo" />
-        <img src="assets/clients/caece.png"          alt="Universidad CAECE" class="marquee-logo" />
-        <img src="assets/clients/emovere.png"        alt="Emovere" class="marquee-logo" />
-        <img src="assets/clients/generalcandies.png" alt="General Candies" class="marquee-logo" />
-        <img src="assets/clients/warp.png"           alt="Warp Estudios" class="marquee-logo" />
-        <img src="assets/clients/gorriti.png"        alt="Gorriti Art Center" class="marquee-logo" />
-        <img src="assets/clients/zittana.png"        alt="Zittana Textil" class="marquee-logo" />
+        <div class="client-badge"><img src="assets/clients/open25hs.png"      alt="Open 25 HS" /></div>
+        <div class="client-badge"><img src="assets/clients/caece.png"          alt="Universidad CAECE" /></div>
+        <div class="client-badge"><img src="assets/clients/emovere.png"        alt="Emovere" /></div>
+        <div class="client-badge"><img src="assets/clients/generalcandies.png" alt="General Candies" /></div>
+        <div class="client-badge"><img src="assets/clients/warp.png"           alt="Warp Estudios" /></div>
+        <div class="client-badge"><img src="assets/clients/gorriti.png"        alt="Gorriti Art Center" /></div>
+        <div class="client-badge"><img src="assets/clients/zittana.png"        alt="Zittana Textil" /></div>
+        <div class="client-badge"><img src="assets/clients/open25hs.png"      alt="Open 25 HS" /></div>
+        <div class="client-badge"><img src="assets/clients/caece.png"          alt="Universidad CAECE" /></div>
+        <div class="client-badge"><img src="assets/clients/emovere.png"        alt="Emovere" /></div>
+        <div class="client-badge"><img src="assets/clients/generalcandies.png" alt="General Candies" /></div>
+        <div class="client-badge"><img src="assets/clients/warp.png"           alt="Warp Estudios" /></div>
+        <div class="client-badge"><img src="assets/clients/gorriti.png"        alt="Gorriti Art Center" /></div>
+        <div class="client-badge"><img src="assets/clients/zittana.png"        alt="Zittana Textil" /></div>
       </div>
     </div>
   </div>
