@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NUEVA IDEA MKT — Agencia growth partner enfocada en el crecimiento sostenible y escalable de tu negocio." />
+  <meta name="keywords" content="marketing digital, growth partner, agencia, publicidad, estrategia, redes sociales" />
+  <meta property="og:title" content="NUEVA IDEA MKT | Growth Partner" />
+  <meta property="og:description" content="Creamos growth loops para que tu negocio funcione las 24hs los 365 días." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nuevaideamkt.com" />
+  <title>NUEVA IDEA MKT | Growth Partner</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       RESET & CUSTOM PROPERTIES
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0a0a0a;
+      --bg-card:    #111111;
+      --bg-hover:   #1a1a1a;
+      --border:     rgba(255,255,255,.08);
+      --accent:     #c8f135;
+      --accent-dim: rgba(200,241,53,.15);
+      --white:      #ffffff;
+      --gray-1:     #f0f0f0;
+      --gray-2:     #a0a0a0;
+      --gray-3:     #555555;
+      --font-main:  'Inter', sans-serif;
+      --font-alt:   'Space Grotesk', sans-serif;
+      --radius:     16px;
+      --radius-sm:  8px;
+      --shadow:     0 4px 40px rgba(0,0,0,.6);
+      --transition: .3s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--accent); color: #000; }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ============================================================
+       NOISE TEXTURE OVERLAY
+    ============================================================ */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: .4;
+    }
+
+    /* ============================================================
+       UTILITY CLASSES
+    ============================================================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 100px 0; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-dim); border: 1px solid var(--accent);
+      color: var(--accent); border-radius: 100px;
+      padding: 6px 16px; font-size: .75rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .tag::before { content: '●'; font-size: .5rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 28px; border-radius: var(--radius-sm);
+      font-family: var(--font-main); font-weight: 700;
+      font-size: .875rem; letter-spacing: .04em;
+      cursor: pointer; border: none; transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--accent); color: #000;
+    }
+    .btn-primary:hover {
+      background: #d9ff3d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(200,241,53,.35);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--white);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       REVEAL ANIMATION
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      padding: 20px 0;
+      transition: background var(--transition), backdrop-filter var(--transition), padding var(--transition);
+    }
+    .navbar.scrolled {
+      background: rgba(10,10,10,.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-alt);
+      font-weight: 700; font-size: 1.2rem;
+      letter-spacing: -.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+    }
+    .nav-links a {
+      font-size: .875rem; font-weight: 500; color: var(--gray-2);
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1.5px; background: var(--accent);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-socials {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .nav-socials a {
+      color: var(--gray-2); transition: color var(--transition);
+      display: flex; align-items: center;
+    }
+    .nav-socials a:hover { color: var(--accent); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px; background: var(--white);
+      border-radius: 2px; transition: var(--transition);
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 0 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,241,53,.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 85% 50%, rgba(200,241,53,.04) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 800px;
+    }
+    .hero-badge {
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: var(--font-alt);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700; line-height: 1.05;
+      letter-spacing: -.03em;
+      margin-bottom: 24px;
+    }
+    .hero-title .highlight {
+      color: var(--accent);
+      position: relative;
+    }
+    .hero-title .highlight::after {
+      content: '';
+      position: absolute; bottom: 4px; left: 0; right: 0;
+      height: 3px; background: var(--accent); opacity: .4;
+      border-radius: 2px;
+    }
+    .hero-desc {
+      font-size: 1.125rem; color: var(--gray-2);
+      max-width: 520px; margin-bottom: 40px; line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .hero-stats {
+      margin-top: 72px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .stat-item {
+      background: var(--bg);
+      padding: 24px 28px;
+      transition: background var(--transition);
+    }
+    .stat-item:hover { background: var(--bg-card); }
+    .stat-number {
+      font-family: var(--font-alt);
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--accent); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: .8125rem; color: var(--gray-2); font-weight: 500;
+    }
+
+    /* ============================================================
+       MARQUEE (LOGOS / TRUST BAR)
+    ============================================================ */
+    .marquee-section {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .marquee-label {
+      text-align: center; font-size: .75rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gray-3); margin-bottom: 28px;
+    }
+    .marquee-track {
+      display: flex; gap: 60px;
+      animation: marquee 25s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      font-family: var(--font-alt); font-weight: 700;
+      font-size: 1.1rem; color: var(--gray-3);
+      letter-spacing: .05em; white-space: nowrap;
+      transition: color var(--transition);
+    }
+    .marquee-item:hover { color: var(--white); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ============================================================
+       SERVICES
+    ============================================================ */
+    .section-header {
+      margin-bottom: 64px;
+    }
+    .section-header .tag { margin-bottom: 20px; }
+    .section-title {
+      font-family: var(--font-alt);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; letter-spacing: -.025em;
+      margin-bottom: 16px; line-height: 1.15;
+    }
+    .section-subtitle {
+      font-size: 1rem; color: var(--gray-2);
+      max-width: 500px; line-height: 1.7;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .service-card {
+      background: var(--bg-card);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition);
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .service-card:hover { background: var(--bg-hover); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(200,241,53,.3);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 24px;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .service-card:hover .service-icon {
+      background: rgba(200,241,53,.25);
+      border-color: var(--accent);
+    }
+    .service-name {
+      font-family: var(--font-alt);
+      font-size: 1.2rem; font-weight: 700;
+      margin-bottom: 12px; letter-spacing: -.01em;
+    }
+    .service-desc {
+      font-size: .9rem; color: var(--gray-2); line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .service-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .service-tag {
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 4px; padding: 4px 10px;
+      font-size: .75rem; color: var(--gray-2);
+    }
+    .service-number {
+      position: absolute; top: 32px; right: 32px;
+      font-family: var(--font-alt); font-size: 3.5rem;
+      font-weight: 800; color: rgba(255,255,255,.04);
+      line-height: 1;
+    }
+
+    /* ============================================================
+       METHODOLOGY
+    ============================================================ */
+    .method-section { background: var(--bg-card); }
+    .method-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center;
+    }
+    .method-steps { display: flex; flex-direction: column; gap: 0; }
+    .method-step {
+      display: flex; gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      cursor: default;
+    }
+    .method-step:first-child { padding-top: 0; }
+    .method-step:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-number {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-alt); font-size: .875rem; font-weight: 700;
+      color: var(--gray-2);
+      transition: var(--transition);
+      margin-top: 4px;
+    }
+    .method-step:hover .step-number {
+      background: var(--accent); color: #000;
+      border-color: var(--accent);
+    }
+    .step-content {}
+    .step-title {
+      font-family: var(--font-alt);
+      font-size: 1.05rem; font-weight: 700;
+      margin-bottom: 8px; letter-spacing: -.01em;
+    }
+    .step-desc { font-size: .875rem; color: var(--gray-2); line-height: 1.7; }
+    .method-visual {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .method-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(200,241,53,.06) 0%, transparent 70%);
+    }
+    .loop-graphic {
+      position: relative; z-index: 1;
+      width: 220px; height: 220px;
+      margin: 0 auto 32px;
+    }
+    .loop-ring {
+      position: absolute; border-radius: 50%;
+      border: 1.5px solid;
+      animation: spin linear infinite;
+    }
+    .loop-ring:nth-child(1) {
+      inset: 0; border-color: rgba(200,241,53,.3);
+      animation-duration: 12s;
+    }
+    .loop-ring:nth-child(2) {
+      inset: 20px; border-color: rgba(200,241,53,.2);
+      animation-duration: 9s; animation-direction: reverse;
+    }
+    .loop-ring:nth-child(3) {
+      inset: 40px; border-color: rgba(200,241,53,.15);
+      animation-duration: 6s;
+    }
+    .loop-center {
+      position: absolute; inset: 60px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(200,241,53,.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .loop-label {
+      font-family: var(--font-alt);
+      font-size: 1rem; font-weight: 700;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .loop-sublabel {
+      font-size: .8125rem; color: var(--gray-2); line-height: 1.6;
+    }
+
+    /* ============================================================
+       GROWTH BANNER
+    ============================================================ */
+    .growth-banner {
+      padding: 80px 0;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(200,241,53,.06) 0%, transparent 50%),
+        var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .growth-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(200,241,53,.05) 0%, transparent 70%);
+    }
+    .growth-banner-content { position: relative; z-index: 1; }
+    .growth-headline {
+      font-family: var(--font-alt);
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      font-weight: 800; letter-spacing: -.04em;
+      line-height: 1.1; margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+    .growth-headline span { color: var(--accent); }
+
+    /* ============================================================
+       PROCESS TIMELINE
+    ============================================================ */
+    .process-section {}
+    .timeline {
+      position: relative; max-width: 760px; margin: 0 auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; top: 0; bottom: 0; left: 20px;
+      width: 1px; background: var(--border);
+    }
+    .timeline-item {
+      display: flex; gap: 32px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      flex-shrink: 0;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; position: relative; z-index: 1;
+      transition: var(--transition);
+    }
+    .timeline-item:hover .timeline-dot {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+    .timeline-body {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      flex: 1;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .timeline-item:hover .timeline-body {
+      border-color: rgba(200,241,53,.25);
+      background: var(--bg-hover);
+    }
+    .timeline-phase {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .timeline-title {
+      font-family: var(--font-alt);
+      font-size: 1.05rem; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .timeline-desc {
+      font-size: .875rem; color: var(--gray-2); line-height: 1.7;
+    }
+
+    /* ============================================================
+       SOCIAL PROOF / TESTIMONIALS
+    ============================================================ */
+    .proof-section { background: var(--bg-card); }
+    .proof-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .proof-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .proof-card:hover {
+      border-color: rgba(200,241,53,.25);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.4);
+    }
+    .proof-stars {
+      display: flex; gap: 4px; margin-bottom: 16px;
+      color: var(--accent); font-size: .875rem;
+    }
+    .proof-text {
+      font-size: .9rem; color: var(--gray-1);
+      line-height: 1.7; margin-bottom: 20px;
+      font-style: italic;
+    }
+    .proof-author {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .proof-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--accent-dim);
+      border: 1px solid rgba(200,241,53,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; font-weight: 700; color: var(--accent);
+    }
+    .proof-name {
+      font-weight: 700; font-size: .875rem; margin-bottom: 2px;
+    }
+    .proof-role { font-size: .775rem; color: var(--gray-2); }
+
+    /* ============================================================
+       CTA SECTION
+    ============================================================ */
+    .cta-section {
+      padding: 120px 0; text-align: center;
+      background:
+        radial-gradient(ellipse 70% 70% at 50% 100%, rgba(200,241,53,.08) 0%, transparent 70%),
+        var(--bg);
+    }
+    .cta-title {
+      font-family: var(--font-alt);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 700; letter-spacing: -.03em;
+      line-height: 1.1; margin-bottom: 20px;
+    }
+    .cta-title span { color: var(--accent); }
+    .cta-subtitle {
+      font-size: 1.1rem; color: var(--gray-2);
+      max-width: 440px; margin: 0 auto 40px; line-height: 1.7;
+    }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-wa {
+      background: #25D366; color: #fff; font-weight: 700;
+      padding: 16px 32px; border-radius: var(--radius-sm);
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-main); font-size: .9375rem;
+      letter-spacing: .02em; transition: var(--transition); border: none;
+      cursor: pointer;
+    }
+    .btn-wa:hover {
+      background: #20c05c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,.3);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 40px;
+    }
+    .footer-inner {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-name {
+      font-family: var(--font-alt);
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;
+    }
+    .footer-brand-name span { color: var(--accent); }
+    .footer-brand-desc {
+      font-size: .875rem; color: var(--gray-2);
+      line-height: 1.7; margin-bottom: 24px; max-width: 280px;
+    }
+    .footer-socials { display: flex; gap: 12px; }
+    .footer-social-btn {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-2); font-size: .875rem;
+      transition: var(--transition);
+    }
+    .footer-social-btn:hover {
+      border-color: var(--accent); color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .footer-col-title {
+      font-weight: 700; font-size: .875rem;
+      margin-bottom: 20px; color: var(--gray-1);
+      letter-spacing: .02em;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a {
+      font-size: .875rem; color: var(--gray-2);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-copy {
+      font-size: .8125rem; color: var(--gray-3);
+    }
+    .footer-copy a { color: var(--accent); }
+    .footer-tagline {
+      font-size: .8125rem; color: var(--gray-3);
+    }
+
+    /* ============================================================
+       MOBILE MENU
+    ============================================================ */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 850;
+      background: rgba(10,10,10,.98);
+      backdrop-filter: blur(20px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 36px;
+      transform: translateX(100%);
+      transition: transform .4s cubic-bezier(.4,0,.2,1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      font-family: var(--font-alt);
+      font-size: 2rem; font-weight: 700;
+      color: var(--gray-2); transition: color var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--white); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .nav-links, .nav-socials { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .method-grid { grid-template-columns: 1fr; gap: 48px; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.4rem; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#inicio" class="nav-logo">NUEVA IDEA <span>MKT</span></a>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#metodologia">Metodología</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#testimonios">Clientes</a></li>
+      </ul>
+      <div class="nav-socials">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:mati@nuevaideamkt.com" aria-label="Email">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+        <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="btn btn-primary" style="padding:10px 20px;font-size:.8125rem;">
+          RESERVAR UNA LLAMADA
+        </a>
+      </div>
+      <div class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#servicios"   onclick="closeMobile()">Servicios</a>
+    <a href="#metodologia" onclick="closeMobile()">Metodología</a>
+    <a href="#proceso"     onclick="closeMobile()">Proceso</a>
+    <a href="#testimonios" onclick="closeMobile()">Clientes</a>
+    <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="btn btn-primary">RESERVAR UNA LLAMADA</a>
+  </div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge reveal">
+          <span class="tag">Growth Partner · Marketing Digital</span>
+        </div>
+        <h1 class="hero-title reveal reveal-delay-1">
+          Hacemos crecer<br>tu negocio de forma<br><span class="highlight">sostenible</span>
+        </h1>
+        <p class="hero-desc reveal reveal-delay-2">
+          Somos una agencia growth partner especializada en crear sistemas de crecimiento escalables y automatizados para que tu negocio funcione las 24hs.
+        </p>
+        <div class="hero-actions reveal reveal-delay-3">
+          <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="btn-wa">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            RESERVAR UNA LLAMADA
+          </a>
+          <a href="#servicios" class="btn btn-outline">Ver servicios &darr;</a>
+        </div>
+        <div class="hero-stats reveal reveal-delay-4">
+          <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Clientes activos</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">3x</div>
+            <div class="stat-label">Crecimiento promedio</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Sistemas activos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TRUST BAR / MARQUEE
+  ============================================================ -->
+  <div class="marquee-section">
+    <p class="marquee-label">Empresas que confiaron en nosotros</p>
+    <div style="overflow:hidden;">
+      <div class="marquee-track">
+        <span class="marquee-item">E-COMMERCE</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">RETAIL</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">REAL ESTATE</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">SALUD</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">EDUCACIÓN</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">TECNOLOGÍA</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">GASTRONOMÍA</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">SERVICIOS B2B</span>
+        <span class="marquee-item">·</span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee-item">E-COMMERCE</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">RETAIL</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">REAL ESTATE</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">SALUD</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">EDUCACIÓN</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">TECNOLOGÍA</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">GASTRONOMÍA</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">SERVICIOS B2B</span>
+        <span class="marquee-item">·</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SERVICES
+  ============================================================ -->
+  <section class="section" id="servicios">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag">Servicios</span>
+        <h2 class="section-title">Todo lo que tu negocio<br>necesita para crecer</h2>
+        <p class="section-subtitle">Cada servicio está diseñado como un componente del sistema de crecimiento de tu empresa.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <div class="service-number">01</div>
+          <div class="service-icon">🧭</div>
+          <h3 class="service-name">Consultoría Personalizada</h3>
+          <p class="service-desc">Diagnóstico profundo de tu negocio para identificar oportunidades de crecimiento y cuellos de botella que frenan tus resultados.</p>
+          <div class="service-tags">
+            <span class="service-tag">Auditoría digital</span>
+            <span class="service-tag">Benchmarking</span>
+            <span class="service-tag">KPIs</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-number">02</div>
+          <div class="service-icon">🗺️</div>
+          <h3 class="service-name">Desarrollo Estratégico</h3>
+          <p class="service-desc">Construimos un roadmap de crecimiento por etapas con entregables claros, métricas medibles y proyección de resultados real.</p>
+          <div class="service-tags">
+            <span class="service-tag">Roadmap</span>
+            <span class="service-tag">OKRs</span>
+            <span class="service-tag">Growth loops</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-number">03</div>
+          <div class="service-icon">📣</div>
+          <h3 class="service-name">Campañas Publicitarias</h3>
+          <p class="service-desc">Creación, gestión y optimización de campañas en Meta, Google y TikTok Ads orientadas a resultados medibles y ROI positivo.</p>
+          <div class="service-tags">
+            <span class="service-tag">Meta Ads</span>
+            <span class="service-tag">Google Ads</span>
+            <span class="service-tag">TikTok Ads</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-number">04</div>
+          <div class="service-icon">✨</div>
+          <h3 class="service-name">Creatividad en RRSS</h3>
+          <p class="service-desc">Producción de contenido estratégico para redes sociales que convierte audiencia en comunidad y comunidad en clientes.</p>
+          <div class="service-tags">
+            <span class="service-tag">Contenido orgánico</span>
+            <span class="service-tag">Branding</span>
+            <span class="service-tag">Copywriting</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       METHODOLOGY
+  ============================================================ -->
+  <section class="section method-section" id="metodologia">
+    <div class="container">
+      <div class="method-grid">
+        <div>
+          <div class="section-header reveal">
+            <span class="tag">Metodología</span>
+            <h2 class="section-title">¿Cómo lo hacemos?</h2>
+            <p class="section-subtitle">Un proceso probado que convierte el potencial de tu negocio en resultados reales y sostenibles.</p>
+          </div>
+          <div class="method-steps">
+            <div class="method-step reveal">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3 class="step-title">Análisis Inicial y Diagnóstico</h3>
+                <p class="step-desc">Entendemos la situación actual de tu negocio, analizamos la competencia y detectamos las oportunidades de mayor impacto.</p>
+              </div>
+            </div>
+            <div class="method-step reveal reveal-delay-1">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3 class="step-title">Roadmap Estratégico</h3>
+                <p class="step-desc">Plan de acción detallado por etapas con entregables claros, responsables definidos y fechas comprometidas.</p>
+              </div>
+            </div>
+            <div class="method-step reveal reveal-delay-2">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3 class="step-title">Proyección de Resultados</h3>
+                <p class="step-desc">Visualización clara de los logros esperados con métricas reales y reportes periódicos de avance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="method-visual reveal reveal-delay-1">
+          <div class="loop-graphic">
+            <div class="loop-ring"></div>
+            <div class="loop-ring"></div>
+            <div class="loop-ring"></div>
+            <div class="loop-center">🔁</div>
+          </div>
+          <div class="loop-label">Growth Loop Activado</div>
+          <div class="loop-sublabel">Tu negocio generando resultados<br>de forma automática y constante.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GROWTH BANNER
+  ============================================================ -->
+  <div class="growth-banner">
+    <div class="container growth-banner-content">
+      <h2 class="growth-headline reveal">
+        Creamos <span>growth loops</span> para que<br>tu negocio funcione las <span>24hs</span> los <span>365 días</span>
+      </h2>
+      <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="btn-wa reveal reveal-delay-1">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        QUIERO SABER MÁS
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PROCESS TIMELINE
+  ============================================================ -->
+  <section class="section process-section" id="proceso">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center; align-items:center; display:flex; flex-direction:column;">
+        <span class="tag">Proceso</span>
+        <h2 class="section-title">De la primera llamada<br>a resultados reales</h2>
+        <p class="section-subtitle" style="text-align:center;">Así es el camino desde que nos contactás hasta que tu negocio está creciendo en piloto automático.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">📞</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 01</div>
+            <h3 class="timeline-title">Llamada de Diagnóstico</h3>
+            <p class="timeline-desc">Analizamos tu negocio, objetivos y situación actual en una llamada de 45 minutos sin costo ni compromiso.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-1">
+          <div class="timeline-dot">📋</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 02</div>
+            <h3 class="timeline-title">Propuesta Personalizada</h3>
+            <p class="timeline-desc">Desarrollamos una propuesta estratégica a medida con proyección de resultados, plazos y métricas claras.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-2">
+          <div class="timeline-dot">🚀</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 03</div>
+            <h3 class="timeline-title">Onboarding y Lanzamiento</h3>
+            <p class="timeline-desc">Configuramos todos los sistemas, creamos los activos necesarios y lanzamos las primeras acciones de crecimiento.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-3">
+          <div class="timeline-dot">📈</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 04</div>
+            <h3 class="timeline-title">Optimización Continua</h3>
+            <p class="timeline-desc">Iteramos, medimos y mejoramos cada semana. Reportes claros y comunicación constante para que veas el progreso en tiempo real.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIALS
+  ============================================================ -->
+  <section class="section proof-section" id="testimonios">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag">Testimonios</span>
+        <h2 class="section-title">Lo que dicen<br>nuestros clientes</h2>
+        <p class="section-subtitle">Resultados reales de empresas que decidieron trabajar con un growth partner.</p>
+      </div>
+      <div class="proof-grid">
+        <div class="proof-card reveal">
+          <div class="proof-stars">★★★★★</div>
+          <p class="proof-text">"En 3 meses triplicamos las consultas desde redes sociales. La estrategia estuvo muy bien ejecutada y los resultados hablan solos."</p>
+          <div class="proof-author">
+            <div class="proof-avatar">AG</div>
+            <div>
+              <div class="proof-name">Andrea G.</div>
+              <div class="proof-role">CEO · Clínica Estética</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-card reveal reveal-delay-1">
+          <div class="proof-stars">★★★★★</div>
+          <p class="proof-text">"Por primera vez tengo un sistema de captación que funciona sin que yo esté pendiente. Mis ventas online crecieron un 180%."</p>
+          <div class="proof-author">
+            <div class="proof-avatar">ML</div>
+            <div>
+              <div class="proof-name">Marcos L.</div>
+              <div class="proof-role">Dueño · E-commerce Fitness</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-card reveal reveal-delay-2">
+          <div class="proof-stars">★★★★★</div>
+          <p class="proof-text">"El roadmap estratégico que nos armaron fue una hoja de ruta clarísima. Cumplimos todos los hitos del primer semestre."</p>
+          <div class="proof-author">
+            <div class="proof-avatar">SR</div>
+            <div>
+              <div class="proof-name">Sofía R.</div>
+              <div class="proof-role">Directora · Inmobiliaria</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA FINAL
+  ============================================================ -->
+  <section class="cta-section" id="contacto">
+    <div class="container">
+      <h2 class="cta-title reveal">
+        ¿Listo para <span>crecer</span><br>sin límites?
+      </h2>
+      <p class="cta-subtitle reveal reveal-delay-1">
+        Agendá una llamada gratuita de 45 minutos y descubrí cómo podemos escalar tu negocio.
+      </p>
+      <div class="cta-buttons reveal reveal-delay-2">
+        <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="btn-wa">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          RESERVAR UNA LLAMADA
+        </a>
+        <a href="mailto:mati@nuevaideamkt.com" class="btn btn-outline">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Enviar un email
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">NUEVA IDEA <span>MKT</span></div>
+          <p class="footer-brand-desc">Agencia growth partner enfocada en el crecimiento sostenible y escalable de tu negocio.</p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="LinkedIn">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="mailto:mati@nuevaideamkt.com" class="footer-social-btn" aria-label="Email">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+            <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="footer-social-btn" aria-label="WhatsApp">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Servicios</div>
+          <ul class="footer-links">
+            <li><a href="#servicios">Consultoría</a></li>
+            <li><a href="#servicios">Estrategia</a></li>
+            <li><a href="#servicios">Campañas Ads</a></li>
+            <li><a href="#servicios">Redes Sociales</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Empresa</div>
+          <ul class="footer-links">
+            <li><a href="#metodologia">Metodología</a></li>
+            <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#testimonios">Clientes</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contacto</div>
+          <ul class="footer-links">
+            <li><a href="mailto:mati@nuevaideamkt.com">mati@nuevaideamkt.com</a></li>
+            <li><a href="https://wa.me/541161645759" target="_blank" rel="noopener">+54 11 6164-5759</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 <a href="#inicio">Nueva Idea MKT</a>. Todos los derechos reservados.</p>
+        <p class="footer-tagline">Hacemos crecer negocios · 24hs · 365 días</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Smooth anchor scroll offset for fixed nav
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = navbar.offsetHeight + 16;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+      });
+    });
+
+    // Trigger reveals already in view on load
+    window.dispatchEvent(new Event('scroll'));
+  </script>
+</body>
+</html>
