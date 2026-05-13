@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="El sistema paso a paso para empezar a vender en Mercado Libre y construir una cuenta con reputación sólida. 9 módulos en video + 3 materiales PDF." />
+  <meta property="og:title" content="De Cero a Mercado Líder — Nueva Idea MKT" />
+  <meta property="og:description" content="Aprendé cómo funciona ML por dentro: el algoritmo, la reputación y el plan exacto para los primeros 90 días." />
+  <meta property="og:type" content="website" />
+  <title>De Cero a Mercado Líder — Nueva Idea MKT</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://static.hotmart.com/css/hotmart-fb.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0a0a0a;
+      --bg-card:    #111111;
+      --bg-hover:   #1a1a1a;
+      --border:     rgba(255,255,255,.08);
+      --accent:     #c8f135;
+      --accent-dim: rgba(200,241,53,.15);
+      --white:      #ffffff;
+      --gray-1:     #f0f0f0;
+      --gray-2:     #a0a0a0;
+      --gray-3:     #555555;
+      --font-main:  'Inter', sans-serif;
+      --font-alt:   'Space Grotesk', sans-serif;
+      --font-brand: 'Poppins', sans-serif;
+      --radius:     16px;
+      --radius-sm:  8px;
+      --transition: .3s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: var(--font-main); line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: var(--accent); color: #000; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: .4;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-dim); border: 1px solid var(--accent);
+      color: var(--accent); border-radius: 100px;
+      padding: 6px 16px; font-size: .75rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .tag::before { content: '●'; font-size: .5rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 32px; border-radius: var(--radius-sm);
+      font-family: var(--font-main); font-weight: 700; font-size: 1rem;
+      letter-spacing: .02em; cursor: pointer; border: none; transition: var(--transition);
+      white-space: nowrap; text-decoration: none;
+    }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { background: #d9ff3d; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,241,53,.4); }
+    .btn-lg { padding: 20px 40px; font-size: 1.0625rem; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      padding: 20px 0; transition: background var(--transition), backdrop-filter var(--transition), padding var(--transition);
+    }
+    .navbar.scrolled {
+      background: rgba(10,10,10,.9); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 14px 0;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { height: 32px; width: auto; }
+    .nav-logo-text { font-family: var(--font-brand); font-weight: 800; font-size: 1rem; letter-spacing: -.01em; }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-cta { font-size: .875rem; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 140px 0 100px; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,241,53,.09) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 90% 60%, rgba(200,241,53,.04) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 10%, transparent 80%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+    .hero-badge { margin-bottom: 28px; }
+    .hero-eyebrow { font-size: .8125rem; color: var(--gray-2); margin-bottom: 16px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+    .hero-title {
+      font-family: var(--font-brand);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800; line-height: 1.0; letter-spacing: -.04em; margin-bottom: 24px;
+    }
+    .hero-title .highlight {
+      color: var(--accent); position: relative;
+    }
+    .hero-desc { font-size: 1.15rem; color: var(--gray-2); max-width: 560px; margin-bottom: 16px; line-height: 1.75; }
+    .hero-price-row {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 36px;
+    }
+    .price-old { font-size: 1.1rem; color: var(--gray-3); text-decoration: line-through; }
+    .price-new { font-family: var(--font-alt); font-size: 2.2rem; font-weight: 800; color: var(--accent); }
+    .price-badge {
+      background: rgba(200,241,53,.15); border: 1px solid rgba(200,241,53,.3);
+      color: var(--accent); border-radius: 6px; padding: 4px 10px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+    .hero-guarantee { font-size: .8125rem; color: var(--gray-3); display: flex; align-items: center; gap: 6px; }
+    .hero-guarantee::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .stat-item { background: var(--bg); padding: 24px 20px; transition: background var(--transition); }
+    .stat-item:hover { background: var(--bg-card); }
+    .stat-number { font-family: var(--font-alt); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: .8rem; color: var(--gray-2); font-weight: 500; }
+
+    /* ── PARA QUIÉN ── */
+    .para-quien { padding: 100px 0; }
+    .para-quien-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+    .pq-card {
+      border-radius: var(--radius); padding: 40px;
+      border: 1px solid var(--border);
+    }
+    .pq-card.yes { background: var(--bg-card); border-color: rgba(200,241,53,.2); }
+    .pq-card.no  { background: var(--bg); }
+    .pq-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+    .pq-icon { font-size: 1.5rem; }
+    .pq-title { font-family: var(--font-alt); font-size: 1.15rem; font-weight: 700; }
+    .pq-list { display: flex; flex-direction: column; gap: 14px; }
+    .pq-item { display: flex; align-items: flex-start; gap: 12px; font-size: .9375rem; color: var(--gray-1); line-height: 1.5; }
+    .pq-item .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+    .pq-card.yes .dot { background: var(--accent); }
+    .pq-card.no  .dot { background: var(--gray-3); }
+
+    /* ── INSTRUCTOR ── */
+    .instructor { padding: 100px 0; background: var(--bg-card); }
+    .instructor-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .instructor-text .tag { margin-bottom: 24px; }
+    .instructor-name { font-family: var(--font-brand); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px; line-height: 1.1; }
+    .instructor-role { color: var(--accent); font-weight: 600; font-size: .9375rem; margin-bottom: 24px; letter-spacing: .02em; }
+    .instructor-bio { color: var(--gray-2); line-height: 1.8; font-size: .9375rem; margin-bottom: 32px; }
+    .instructor-creds { display: flex; flex-direction: column; gap: 12px; }
+    .cred-item { display: flex; align-items: center; gap: 12px; font-size: .875rem; color: var(--gray-1); }
+    .cred-item::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .instructor-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 40px;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .instructor-card-title { font-family: var(--font-alt); font-size: .8125rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 4px; }
+    .instructor-stat-big { font-family: var(--font-alt); font-size: 3rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .instructor-stat-label { font-size: .875rem; color: var(--gray-2); margin-top: 4px; }
+    .instructor-divider { height: 1px; background: var(--border); }
+    .client-logos-mini { display: flex; flex-direction: column; gap: 10px; }
+    .client-logo-item {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 16px;
+    }
+    .client-logo-item img { height: 28px; width: auto; object-fit: contain; filter: grayscale(0); }
+    .client-logo-label { font-size: .8125rem; color: var(--gray-2); }
+    .ml-cert-badge {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--accent-dim); border: 1px solid rgba(200,241,53,.3);
+      border-radius: var(--radius-sm); padding: 12px 16px;
+    }
+    .ml-cert-badge img { height: 32px; width: auto; }
+    .ml-cert-badge span { font-size: .8125rem; font-weight: 600; color: var(--accent); }
+
+    /* ── MÓDULOS ── */
+    .modulos { padding: 100px 0; }
+    .modulos-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; background: var(--border); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; margin-top: 56px;
+    }
+    .modulo-card {
+      background: var(--bg-card); padding: 32px 28px;
+      transition: background var(--transition); position: relative; overflow: hidden;
+    }
+    .modulo-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0); transform-origin: left; transition: transform var(--transition);
+    }
+    .modulo-card:hover { background: var(--bg-hover); }
+    .modulo-card:hover::before { transform: scaleX(1); }
+    .modulo-tag { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .modulo-title { font-family: var(--font-alt); font-size: 1rem; font-weight: 700; margin-bottom: 8px; line-height: 1.3; letter-spacing: -.01em; }
+    .modulo-desc { font-size: .8125rem; color: var(--gray-2); line-height: 1.65; }
+    .modulo-dur { display: inline-block; margin-top: 14px; font-size: .72rem; color: var(--gray-3); background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px; }
+    .modulo-num { position: absolute; top: 24px; right: 24px; font-family: var(--font-alt); font-size: 2.5rem; font-weight: 800; color: rgba(255,255,255,.03); line-height: 1; }
+
+    /* ── INCLUYE ── */
+    .incluye { padding: 100px 0; background: var(--bg-card); }
+    .incluye-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
+    .incluye-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px 28px;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 16px;
+    }
+    .incluye-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(200,241,53,.05) 0%, transparent 70%);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .incluye-card:hover { border-color: rgba(200,241,53,.3); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+    .incluye-card:hover::after { opacity: 1; }
+    .incluye-label { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+    .incluye-title { font-family: var(--font-alt); font-size: 1.1rem; font-weight: 700; letter-spacing: -.01em; line-height: 1.3; }
+    .incluye-desc { font-size: .875rem; color: var(--gray-2); line-height: 1.7; flex: 1; }
+    .incluye-valor { display: flex; align-items: center; gap: 10px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .valor-old { font-size: .875rem; color: var(--gray-3); text-decoration: line-through; }
+    .valor-included { font-size: .875rem; font-weight: 700; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(200,241,53,.2); border-radius: 4px; padding: 3px 10px; }
+
+    /* ── PRECIO ── */
+    .precio-section { padding: 100px 0; }
+    .precio-inner { max-width: 680px; margin: 0 auto; }
+    .precio-card {
+      background: var(--bg-card); border: 1px solid rgba(200,241,53,.25);
+      border-radius: var(--radius); padding: 56px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .precio-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,241,53,.07) 0%, transparent 60%);
+    }
+    .precio-card-content { position: relative; z-index: 1; }
+    .precio-badge { display: inline-block; background: var(--accent); color: #000; font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; }
+    .precio-label { font-size: .875rem; color: var(--gray-2); margin-bottom: 8px; }
+    .precio-old { font-size: 1.25rem; color: var(--gray-3); text-decoration: line-through; margin-bottom: 8px; }
+    .precio-new { font-family: var(--font-brand); font-size: 5rem; font-weight: 800; color: var(--white); line-height: 1; letter-spacing: -.04em; margin-bottom: 8px; }
+    .precio-new span { color: var(--accent); }
+    .precio-sub { font-size: .875rem; color: var(--gray-2); margin-bottom: 40px; }
+    .precio-features { display: flex; flex-direction: column; gap: 12px; text-align: left; margin-bottom: 40px; }
+    .precio-feature { display: flex; align-items: center; gap: 12px; font-size: .9375rem; color: var(--gray-1); }
+    .precio-feature::before { content: '✓'; color: var(--accent); font-weight: 800; flex-shrink: 0; }
+    .precio-cta { width: 100%; margin-bottom: 20px; }
+    .precio-guarantee { font-size: .8125rem; color: var(--gray-3); display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .precio-guarantee::before { content: '🔒'; font-size: 1rem; }
+
+    /* ── GARANTÍA ── */
+    .garantia { padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .garantia-inner { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; max-width: 720px; margin: 0 auto; }
+    .garantia-icon { font-size: 5rem; line-height: 1; }
+    .garantia-title { font-family: var(--font-alt); font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 12px; }
+    .garantia-title span { color: var(--accent); }
+    .garantia-desc { color: var(--gray-2); line-height: 1.75; font-size: .9375rem; }
+
+    /* ── FAQ ── */
+    .faq { padding: 100px 0; background: var(--bg-card); }
+    .faq-list { max-width: 720px; margin: 56px auto 0; display: flex; flex-direction: column; gap: 2px; }
+    .faq-item { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-question {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 28px; background: var(--bg); cursor: pointer;
+      font-family: var(--font-alt); font-size: .9375rem; font-weight: 600;
+      color: var(--white); transition: background var(--transition); text-align: left; border: none;
+    }
+    .faq-question:hover { background: var(--bg-hover); }
+    .faq-question.active { background: var(--bg-hover); color: var(--accent); }
+    .faq-arrow { width: 20px; height: 20px; flex-shrink: 0; transition: transform var(--transition); color: var(--gray-2); }
+    .faq-question.active .faq-arrow { transform: rotate(180deg); color: var(--accent); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .4s ease; background: var(--bg-hover); }
+    .faq-answer.open { max-height: 300px; }
+    .faq-answer-inner { padding: 0 28px 22px; font-size: .9rem; color: var(--gray-2); line-height: 1.75; }
+
+    /* ── CTA FINAL ── */
+    .cta-final {
+      padding: 120px 0; text-align: center;
+      background: radial-gradient(ellipse 70% 70% at 50% 100%, rgba(200,241,53,.08) 0%, transparent 70%), var(--bg);
+    }
+    .cta-final-title { font-family: var(--font-alt); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 16px; }
+    .cta-final-title span { color: var(--accent); }
+    .cta-final-sub { font-size: 1rem; color: var(--gray-2); max-width: 440px; margin: 0 auto 40px; line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; }
+    .footer-logo img { height: 28px; width: auto; }
+    .footer-logo-text { font-family: var(--font-brand); font-weight: 800; font-size: .9375rem; }
+    .footer-logo-text span { color: var(--accent); }
+    .footer-copy { font-size: .8125rem; color: var(--gray-3); }
+    .footer-link { font-size: .8125rem; color: var(--gray-3); transition: color var(--transition); }
+    .footer-link:hover { color: var(--accent); }
+
+    /* ── SECTION HEADER ── */
+    .section-header { margin-bottom: 0; }
+    .section-header .tag { margin-bottom: 20px; }
+    .section-title { font-family: var(--font-alt); font-size: clamp(1.8rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -.025em; margin-bottom: 14px; line-height: 1.2; }
+    .section-subtitle { font-size: 1rem; color: var(--gray-2); max-width: 520px; line-height: 1.7; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .para-quien-grid { grid-template-columns: 1fr; }
+      .instructor-inner { grid-template-columns: 1fr; gap: 40px; }
+      .modulos-grid { grid-template-columns: 1fr; }
+      .incluye-grid { grid-template-columns: 1fr; }
+      .precio-card { padding: 36px 24px; }
+      .precio-new { font-size: 3.5rem; }
+      .garantia-inner { grid-template-columns: 1fr; text-align: center; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="assets/logo.png" alt="Nueva Idea MKT" />
+        <span class="nav-logo-text">NUEVA IDEA <span>MKT</span></span>
+      </a>
+      <a href="#precio" class="btn btn-primary nav-cta">Quiero el curso — USD 17</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <span class="tag">Curso Online · Precio de lanzamiento</span>
+      </div>
+      <p class="hero-eyebrow reveal">Nueva Idea MKT · Matias Arruguete</p>
+      <h1 class="hero-title reveal reveal-delay-1">
+        De Cero a<br><span class="highlight">Mercado Líder</span>
+      </h1>
+      <p class="hero-desc reveal reveal-delay-2">El sistema paso a paso para empezar a vender en Mercado Libre y construir una cuenta con reputación sólida. Todo lo que el 90% de los vendedores no sabe antes de publicar.</p>
+      <div class="hero-price-row reveal reveal-delay-2">
+        <span class="price-old">USD 29</span>
+        <span class="price-new">USD 17</span>
+        <span class="price-badge">Lanzamiento</span>
+      </div>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#precio" class="btn btn-primary btn-lg">Quiero el curso →</a>
+      </div>
+      <p class="hero-guarantee reveal reveal-delay-3">7 días de garantía · Pago único · Acceso de por vida</p>
+
+      <div class="hero-stats reveal reveal-delay-3" style="margin-top: 64px;">
+        <div class="stat-item">
+          <div class="stat-number">6+</div>
+          <div class="stat-label">Años gestionando cuentas reales en ML</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">9</div>
+          <div class="stat-label">Módulos en video con PDF de acompañamiento</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">90</div>
+          <div class="stat-label">Días de plan concreto incluido</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Acceso de por vida al material</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARA QUIÉN ── -->
+<section class="para-quien">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Para quién es</span>
+      <h2 class="section-title" style="margin-top: 20px;">¿Este programa es para vos?</h2>
+      <p class="section-subtitle">Antes de comprar, leé esto. El programa es específico y quiero que sea útil para quien lo compra.</p>
+    </div>
+    <div class="para-quien-grid">
+      <div class="pq-card yes reveal">
+        <div class="pq-header">
+          <span class="pq-icon">✅</span>
+          <span class="pq-title">Es para vos si...</span>
+        </div>
+        <div class="pq-list">
+          <div class="pq-item"><span class="dot"></span><span>Sos freelancer o emprendedor y querés sumar Mercado Libre como canal de ingresos</span></div>
+          <div class="pq-item"><span class="dot"></span><span>Querés empezar a revender productos y no sabés por dónde arrancar</span></div>
+          <div class="pq-item"><span class="dot"></span><span>Ya tenés tienda online o vendés por redes y querés sumar ML sin perder tiempo</span></div>
+          <div class="pq-item"><span class="dot"></span><span>Vendés de manera física y querés dar el salto al canal online</span></div>
+          <div class="pq-item"><span class="dot"></span><span>Nunca vendiste nada en internet y querés empezar con el pie derecho</span></div>
+          <div class="pq-item"><span class="dot"></span><span>Empezaste a vender en ML, las cosas no funcionaron y querés entender por qué</span></div>
+        </div>
+      </div>
+      <div class="pq-card no reveal reveal-delay-1">
+        <div class="pq-header">
+          <span class="pq-icon">❌</span>
+          <span class="pq-title">No es para vos si...</span>
+        </div>
+        <div class="pq-list">
+          <div class="pq-item"><span class="dot"></span><span>Buscás una fórmula mágica para ganar dinero sin esfuerzo</span></div>
+          <div class="pq-item"><span class="dot"></span><span>Ya sos un vendedor con estructura y experiencia sólida en ML</span></div>
+          <div class="pq-item"><span class="dot"></span><span>Querés estrategias avanzadas de escala, optimización de catálogos o ML Ads profundo</span></div>
+          <div class="pq-item"><span class="dot"></span><span>No tenés tiempo para mirar los videos y aplicar lo que se enseña</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INSTRUCTOR ── -->
+<section class="instructor">
+  <div class="container">
+    <div class="instructor-inner">
+      <div class="instructor-text reveal">
+        <span class="tag">El instructor</span>
+        <h2 class="instructor-name" style="margin-top: 24px;">Matias<br>Arruguete</h2>
+        <p class="instructor-role">Fundador · Nueva Idea MKT · Consultora Certificada Mercado Libre</p>
+        <p class="instructor-bio">Llevo más de 6 años trabajando con negocios reales dentro de Mercado Libre — desde cuentas que arrancaban de cero sin saber cómo publicar su primer producto, hasta marcas que hoy procesan cientos de pedidos por mes con reputación Mercado Líder.<br><br>No soy un influencer de marketing. Me meto en el negocio del cliente como si fuera propio, encuentro qué está frenando las ventas y lo resuelvo. Todo lo que vas a ver en este programa es lo que aplico con mis clientes hoy.</p>
+        <div class="instructor-creds">
+          <div class="cred-item">Consultora Certificada por Mercado Libre</div>
+          <div class="cred-item">+6 años gestionando cuentas en Argentina y LATAM</div>
+          <div class="cred-item">Fundador de Nueva Idea MKT — agencia especializada en ecommerce</div>
+          <div class="cred-item">Clientes activos en consumo masivo, indumentaria y servicios</div>
+        </div>
+      </div>
+      <div class="instructor-card reveal reveal-delay-1">
+        <div>
+          <p class="instructor-card-title">Años de experiencia</p>
+          <p class="instructor-stat-big">6+</p>
+          <p class="instructor-stat-label">Gestionando cuentas reales en Mercado Libre</p>
+        </div>
+        <div class="instructor-divider"></div>
+        <div>
+          <p class="instructor-card-title" style="margin-bottom: 12px;">Clientes activos</p>
+          <div class="client-logos-mini">
+            <div class="client-logo-item">
+              <img src="assets/clients/open25hs.png" alt="Open25HS" />
+              <span class="client-logo-label">Open25HS — Consumo masivo</span>
+            </div>
+            <div class="client-logo-item">
+              <img src="assets/clients/generalcandies.png" alt="General Candies" />
+              <span class="client-logo-label">General Candies — ML + Tienda Nube</span>
+            </div>
+          </div>
+        </div>
+        <div class="instructor-divider"></div>
+        <div class="ml-cert-badge">
+          <img src="assets/certs/ml_cert.png" alt="Consultora Certificada Mercado Libre" />
+          <span>Consultora Certificada Mercado Libre</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MÓDULOS ── -->
+<section class="modulos">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">El programa</span>
+      <h2 class="section-title" style="margin-top: 20px;">9 módulos que te llevan de cero a Mercado Líder</h2>
+      <p class="section-subtitle">Cada módulo tiene su propio video y PDF de acompañamiento con los puntos clave. Podés verlos en orden o ir directo al tema que más te interesa.</p>
+    </div>
+    <div class="modulos-grid">
+      <div class="modulo-card reveal">
+        <div class="modulo-num">00</div>
+        <p class="modulo-tag">Bienvenida</p>
+        <p class="modulo-title">Esto es lo que vas a lograr</p>
+        <p class="modulo-desc">Quién soy, por qué creé este programa y qué vas a saber exactamente cuando termines.</p>
+        <span class="modulo-dur">~4 minutos</span>
+      </div>
+      <div class="modulo-card reveal reveal-delay-1">
+        <div class="modulo-num">01</div>
+        <p class="modulo-tag">Módulo 1</p>
+        <p class="modulo-title">¿Vale la pena vender en Mercado Libre?</p>
+        <p class="modulo-desc">Los números reales de ML en Argentina, los pros y contras honestos, y los mitos que frenan a la gente.</p>
+        <span class="modulo-dur">~10 minutos</span>
+      </div>
+      <div class="modulo-card reveal reveal-delay-2">
+        <div class="modulo-num">02</div>
+        <p class="modulo-tag">Módulo 2</p>
+        <p class="modulo-title">Cómo piensa Mercado Libre</p>
+        <p class="modulo-desc">El algoritmo explicado sin tecnicismos. Qué mira ML para decidir quién aparece primero y por qué dos publicaciones del mismo producto dan resultados completamente distintos.</p>
+        <span class="modulo-dur">~12 minutos</span>
+      </div>
+      <div class="modulo-card reveal">
+        <div class="modulo-num">03</div>
+        <p class="modulo-tag">Módulo 3</p>
+        <p class="modulo-title">Los niveles: de vendedor nuevo a Mercado Líder</p>
+        <p class="modulo-desc">El sistema de reputación en detalle. Qué mide ML, qué significa cada color del termómetro y qué necesitás concretamente para llegar al badge.</p>
+        <span class="modulo-dur">~12 minutos</span>
+      </div>
+      <div class="modulo-card reveal reveal-delay-1">
+        <div class="modulo-num">04</div>
+        <p class="modulo-tag">Módulo 4</p>
+        <p class="modulo-title">Cómo arrancar bien desde el primer día</p>
+        <p class="modulo-desc">El error que destruye cuentas antes de que empiecen. El Programa Despegue. Los primeros pasos en orden para que ML empiece a confiar en vos.</p>
+        <span class="modulo-dur">~10 minutos</span>
+      </div>
+      <div class="modulo-card reveal reveal-delay-2">
+        <div class="modulo-num">05</div>
+        <p class="modulo-tag">Módulo 5</p>
+        <p class="modulo-title">Tu tablero de control: el Seller Center</p>
+        <p class="modulo-desc">Las 5 métricas que mirás siempre, la ecuación que define tu crecimiento y cómo gestionar reclamos sin que destruyan tu cuenta.</p>
+        <span class="modulo-dur">~15 minutos</span>
+      </div>
+      <div class="modulo-card reveal">
+        <div class="modulo-num">06</div>
+        <p class="modulo-tag">Módulo 6</p>
+        <p class="modulo-title">El plan por etapa: de cero a Mercado Líder</p>
+        <p class="modulo-desc">Las tres etapas con objetivos distintos: primeros 30 días, 30 a 90 días y el camino al badge. Cuándo activar ML Ads y cómo usar ML para apalancar otros canales.</p>
+        <span class="modulo-dur">~12 minutos</span>
+      </div>
+      <div class="modulo-card reveal reveal-delay-1">
+        <div class="modulo-num">07</div>
+        <p class="modulo-tag">Módulo 7</p>
+        <p class="modulo-title">Los errores que frenan tu cuenta</p>
+        <p class="modulo-desc">Los 5 errores que comete la mayoría de los vendedores nuevos porque nadie se los explicó. Y cómo recuperarte si ya cometiste alguno.</p>
+        <span class="modulo-dur">~10 minutos</span>
+      </div>
+      <div class="modulo-card reveal reveal-delay-2">
+        <div class="modulo-num">→</div>
+        <p class="modulo-tag">Cierre</p>
+        <p class="modulo-title">Tus próximos 7 días</p>
+        <p class="modulo-desc">El conocimiento sin acción no sirve de nada. Una tarea concreta para las próximas 24 horas y el mapa de lo que viene después.</p>
+        <span class="modulo-dur">~4 minutos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INCLUYE ── -->
+<section class="incluye">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Lo que incluís</span>
+      <h2 class="section-title" style="margin-top: 20px;">Más de lo que pagás</h2>
+      <p class="section-subtitle">Además de los videos, el programa incluye tres materiales en PDF para tener siempre a mano.</p>
+    </div>
+    <div class="incluye-grid" style="margin-top: 56px;">
+      <div class="incluye-card reveal">
+        <p class="incluye-label">Incluido</p>
+        <p class="incluye-title">PDF del programa completo</p>
+        <p class="incluye-desc">El material de acompañamiento con todos los puntos clave del curso. Diseñado para releer y consultar sin necesidad de volver a ver los videos.</p>
+        <div class="incluye-valor">
+          <span class="valor-old">USD 15</span>
+          <span class="valor-included">✓ Incluido</span>
+        </div>
+      </div>
+      <div class="incluye-card reveal reveal-delay-1">
+        <p class="incluye-label">Bonus 1</p>
+        <p class="incluye-title">Fundamentales de MELI</p>
+        <p class="incluye-desc">Glosario del Seller Center, checklist de publicación perfecta, tabla de métricas con rangos de referencia, checklist de salud de cuenta y plan 30·60·90 días.</p>
+        <div class="incluye-valor">
+          <span class="valor-old">USD 27</span>
+          <span class="valor-included">✓ Incluido</span>
+        </div>
+      </div>
+      <div class="incluye-card reveal reveal-delay-2">
+        <p class="incluye-label">Bonus 2</p>
+        <p class="incluye-title">Cómo convertirte en Tienda Oficial</p>
+        <p class="incluye-desc">El proceso completo para validar tu marca en ML, obtener el badge verificado y acceder a Brand Ads, Brand Protection y mejora de catálogo.</p>
+        <div class="incluye-valor">
+          <span class="valor-old">USD 27</span>
+          <span class="valor-included">✓ Incluido</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRECIO ── -->
+<section class="precio-section" id="precio">
+  <div class="container">
+    <div class="precio-inner">
+      <div class="precio-card reveal">
+        <div class="precio-card-content">
+          <span class="precio-badge">Precio de lanzamiento</span>
+          <p class="precio-label">Valor total del programa</p>
+          <p class="precio-old">USD 29</p>
+          <p class="precio-new"><span>USD</span> 17</p>
+          <p class="precio-sub">Pago único · Acceso de por vida</p>
+          <div class="precio-features">
+            <div class="precio-feature">9 módulos en video</div>
+            <div class="precio-feature">PDF completo del programa</div>
+            <div class="precio-feature">Bonus 1 — Fundamentales de MELI (glosario, checklists, métricas)</div>
+            <div class="precio-feature">Bonus 2 — Guía Tienda Oficial</div>
+            <div class="precio-feature">Acceso de por vida al contenido</div>
+            <div class="precio-feature">7 días de garantía sin preguntas</div>
+          </div>
+          <a onclick="return false;" href="https://pay.hotmart.com/P105820771X?checkoutMode=2&off=null1hg9" class="hotmart-fb hotmart__button-checkout btn btn-primary btn-lg precio-cta">Quiero el curso — USD 17 →</a>
+          <p class="precio-guarantee">7 días de garantía completa. Si no es lo que esperabas, te devolvemos el 100%.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GARANTÍA ── -->
+<section class="garantia">
+  <div class="container">
+    <div class="garantia-inner reveal">
+      <div class="garantia-icon">🔒</div>
+      <div>
+        <h3 class="garantia-title"><span>7 días</span> de garantía total</h3>
+        <p class="garantia-desc">Si después de ver el programa sentís que no era lo que esperabas, escribime dentro de los primeros 7 días y te devuelvo el 100% del dinero. Sin formularios, sin preguntas, sin vueltas. El riesgo es cero.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq">
+  <div class="container">
+    <div class="section-header reveal" style="text-align: center;">
+      <span class="tag">Preguntas frecuentes</span>
+      <h2 class="section-title" style="margin-top: 20px;">Lo que la gente pregunta antes de comprar</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Necesito experiencia previa para hacer este programa?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. El programa arranca desde cero y está pensado exactamente para quien nunca vendió en ML. No necesitás saber de tecnología ni tener experiencia previa en ecommerce.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Cuánto tiempo lleva completar el programa?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Los 9 módulos suman aproximadamente 90 minutos de video en total. Podés completarlo en una tarde o repartirlo en varios días. El ritmo lo manejás vos.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Por cuánto tiempo tengo acceso al contenido?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Acceso de por vida. Una vez que comprás, el contenido es tuyo para siempre. Podés volver a verlo cuantas veces quieras.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Funciona para cualquier categoría de producto?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Sí. El programa enseña cómo funciona la plataforma por dentro: el algoritmo, la reputación, las métricas y el plan por etapa. Eso aplica a cualquier categoría, desde indumentaria hasta electrónica o consumo masivo.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Qué pasa si el programa no es lo que esperaba?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Tenés 7 días de garantía completa. Si no es lo que esperabas, escribime y te devuelvo el 100% del dinero. Sin preguntas ni formularios.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿El programa incluye acompañamiento personalizado?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">El programa es autoguiado. Si después de completarlo querés acompañamiento personalizado para tu cuenta específica — revisar tus publicaciones, identificar qué frena tus ventas y armar un plan a medida — eso está disponible en nuevaideamkt.com.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA FINAL ── -->
+<section class="cta-final">
+  <div class="container">
+    <h2 class="cta-final-title reveal">Empezá hoy.<br><span>El momento perfecto no existe.</span></h2>
+    <p class="cta-final-sub reveal">El conocimiento sin acción no sirve de nada. USD 17, acceso de por vida, 7 días de garantía.</p>
+    <div class="reveal">
+      <a onclick="return false;" href="https://pay.hotmart.com/P105820771X?checkoutMode=2&off=null1hg9" class="hotmart-fb hotmart__button-checkout btn btn-primary btn-lg">Quiero el curso — USD 17 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="assets/logo.png" alt="Nueva Idea MKT" />
+        <span class="footer-logo-text">NUEVA IDEA <span>MKT</span></span>
+      </div>
+      <p class="footer-copy">© 2026 Nueva Idea MKT · <a href="/" class="footer-link">nuevaideamkt.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-question').forEach(b => b.classList.remove('active'));
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('active'); }
+  }
+</script>
+<script type="text/javascript">
+  (function(){ var s=document.createElement('script'); s.src='https://static.hotmart.com/checkout/widget.min.js'; document.head.appendChild(s); })();
+</script>
+</body>
+</html>
