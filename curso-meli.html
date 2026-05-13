@@ -74,6 +74,7 @@
     }
     .btn-primary { background: var(--accent); color: #000; }
     .btn-primary:hover { background: #d9ff3d; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,241,53,.4); }
+    a.hotmart-fb.btn-primary { color: #000; }
     .btn-lg { padding: 20px 40px; font-size: 1.0625rem; }
 
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
@@ -131,7 +132,7 @@
       margin-bottom: 36px;
     }
     .price-old { font-size: 1.1rem; color: var(--gray-3); text-decoration: line-through; }
-    .price-new { font-family: var(--font-alt); font-size: 2.2rem; font-weight: 800; color: var(--accent); }
+    .price-new { font-family: var(--font-alt); font-size: 3.5rem; font-weight: 800; color: var(--accent); }
     .price-badge {
       background: rgba(200,241,53,.15); border: 1px solid rgba(200,241,53,.3);
       color: var(--accent); border-radius: 6px; padding: 4px 10px;
@@ -325,6 +326,12 @@
     .footer-link { font-size: .8125rem; color: var(--gray-3); transition: color var(--transition); }
     .footer-link:hover { color: var(--accent); }
 
+    /* ── CLIENT TEXT LIST ── */
+    .client-text-list { display: flex; flex-direction: column; gap: 10px; }
+    .client-text-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: .875rem; }
+    .client-name { color: var(--gray-1); font-weight: 600; }
+    .client-cat { color: var(--gray-3); font-size: .8rem; }
+
     /* ── SECTION HEADER ── */
     .section-header { margin-bottom: 0; }
     .section-header .tag { margin-bottom: 20px; }
@@ -342,6 +349,10 @@
       .precio-new { font-size: 3.5rem; }
       .garantia-inner { grid-template-columns: 1fr; text-align: center; gap: 24px; }
     }
+    @media (max-width: 520px) {
+      .nav-logo-text { display: none; }
+      .nav-cta { font-size: .8rem; padding: 12px 18px; }
+    }
   </style>
 </head>
 <body>
@@ -354,7 +365,7 @@
         <img src="assets/logo.png" alt="Nueva Idea MKT" />
         <span class="nav-logo-text">NUEVA IDEA <span>MKT</span></span>
       </a>
-      <a href="#precio" class="btn btn-primary nav-cta">Quiero el curso — USD 17</a>
+      <a href="#precio" class="btn btn-primary nav-cta">Acceder al programa</a>
     </div>
   </div>
 </nav>
@@ -366,7 +377,7 @@
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge reveal">
-        <span class="tag">Curso Online · Precio de lanzamiento</span>
+        <span class="tag">Programa Online · Precio de lanzamiento</span>
       </div>
       <p class="hero-eyebrow reveal">Nueva Idea MKT · Matias Arruguete</p>
       <h1 class="hero-title reveal reveal-delay-1">
@@ -379,7 +390,7 @@
         <span class="price-badge">Lanzamiento</span>
       </div>
       <div class="hero-actions reveal reveal-delay-3">
-        <a href="#precio" class="btn btn-primary btn-lg">Quiero el curso →</a>
+        <a href="#precio" class="btn btn-primary btn-lg">Acceder al programa →</a>
       </div>
       <p class="hero-guarantee reveal reveal-delay-3">7 días de garantía · Pago único · Acceso de por vida</p>
 
@@ -468,16 +479,12 @@
         </div>
         <div class="instructor-divider"></div>
         <div>
-          <p class="instructor-card-title" style="margin-bottom: 12px;">Clientes activos</p>
-          <div class="client-logos-mini">
-            <div class="client-logo-item">
-              <img src="assets/clients/open25hs.png" alt="Open25HS" />
-              <span class="client-logo-label">Open25HS — Consumo masivo</span>
-            </div>
-            <div class="client-logo-item">
-              <img src="assets/clients/generalcandies.png" alt="General Candies" />
-              <span class="client-logo-label">General Candies — ML + Tienda Nube</span>
-            </div>
+          <p class="instructor-card-title" style="margin-bottom: 16px;">Algunos de nuestros clientes</p>
+          <div class="client-text-list">
+            <div class="client-text-item"><span class="client-name">Open25hs!</span><span class="client-cat">Consumo masivo</span></div>
+            <div class="client-text-item"><span class="client-name">General Candies</span><span class="client-cat">Golosinas</span></div>
+            <div class="client-text-item"><span class="client-name">SoloCamperas</span><span class="client-cat">Indumentaria</span></div>
+            <div class="client-text-item"><span class="client-name">NGL importaciones</span><span class="client-cat">Electrónica</span></div>
           </div>
         </div>
         <div class="instructor-divider"></div>
@@ -578,7 +585,7 @@
       <div class="incluye-card reveal">
         <p class="incluye-label">Incluido</p>
         <p class="incluye-title">PDF del programa completo</p>
-        <p class="incluye-desc">El material de acompañamiento con todos los puntos clave del curso. Diseñado para releer y consultar sin necesidad de volver a ver los videos.</p>
+        <p class="incluye-desc">El material de acompañamiento con todos los puntos clave del programa. Diseñado para releer y consultar sin necesidad de volver a ver los videos.</p>
         <div class="incluye-valor">
           <span class="valor-old">USD 15</span>
           <span class="valor-included">✓ Incluido</span>
@@ -625,7 +632,7 @@
             <div class="precio-feature">Acceso de por vida al contenido</div>
             <div class="precio-feature">7 días de garantía sin preguntas</div>
           </div>
-          <a onclick="return false;" href="https://pay.hotmart.com/P105820771X?checkoutMode=2&off=null1hg9" class="hotmart-fb hotmart__button-checkout btn btn-primary btn-lg precio-cta">Quiero el curso — USD 17 →</a>
+          <a onclick="return false;" href="https://pay.hotmart.com/P105820771X?checkoutMode=2&off=null1hg9" class="hotmart-fb hotmart__button-checkout btn btn-primary btn-lg precio-cta">Acceder al programa →</a>
           <p class="precio-guarantee">7 días de garantía completa. Si no es lo que esperabas, te devolvemos el 100%.</p>
         </div>
       </div>
@@ -718,7 +725,7 @@
     <h2 class="cta-final-title reveal">Empezá hoy.<br><span>El momento perfecto no existe.</span></h2>
     <p class="cta-final-sub reveal">El conocimiento sin acción no sirve de nada. USD 17, acceso de por vida, 7 días de garantía.</p>
     <div class="reveal">
-      <a onclick="return false;" href="https://pay.hotmart.com/P105820771X?checkoutMode=2&off=null1hg9" class="hotmart-fb hotmart__button-checkout btn btn-primary btn-lg">Quiero el curso — USD 17 →</a>
+      <a onclick="return false;" href="https://pay.hotmart.com/P105820771X?checkoutMode=2&off=null1hg9" class="hotmart-fb hotmart__button-checkout btn btn-primary btn-lg">Acceder al programa →</a>
     </div>
   </div>
 </section>
