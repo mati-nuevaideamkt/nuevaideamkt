@@ -326,6 +326,19 @@
     .footer-link { font-size: .8125rem; color: var(--gray-3); transition: color var(--transition); }
     .footer-link:hover { color: var(--accent); }
 
+    /* ── COUNTDOWN ── */
+    .countdown-strip {
+      background: rgba(200,241,53,.07);
+      border-top: 1px solid rgba(200,241,53,.15);
+      border-bottom: 1px solid rgba(200,241,53,.15);
+      padding: 18px 0;
+      text-align: center;
+    }
+    .countdown-inner { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .countdown-label { font-size: .875rem; color: var(--gray-2); font-weight: 500; }
+    .countdown-timer { font-family: var(--font-alt); font-size: 1.5rem; font-weight: 700; color: var(--accent); letter-spacing: .04em; min-width: 110px; }
+    .countdown-badge { background: rgba(200,241,53,.15); border: 1px solid rgba(200,241,53,.3); color: var(--accent); border-radius: 6px; padding: 4px 10px; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
     /* ── CLIENT TEXT LIST ── */
     .client-text-list { display: flex; flex-direction: column; gap: 10px; }
     .client-text-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: .875rem; }
@@ -352,6 +365,10 @@
     @media (max-width: 520px) {
       .nav-logo-text { display: none; }
       .nav-cta { font-size: .8rem; padding: 12px 18px; }
+      .hero-price-row { flex-wrap: wrap; align-items: baseline; gap: 10px; }
+      .price-old { white-space: nowrap; font-size: .9rem; }
+      .price-new { white-space: nowrap; font-size: 2.4rem; }
+      .price-badge { white-space: nowrap; }
     }
   </style>
 </head>
@@ -377,7 +394,7 @@
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge reveal">
-        <span class="tag">Programa Online · Precio de lanzamiento</span>
+        <span class="tag">Programa Online · Precio lanzamiento</span>
       </div>
       <p class="hero-eyebrow reveal">Nueva Idea MKT · Matias Arruguete</p>
       <h1 class="hero-title reveal reveal-delay-1">
@@ -415,6 +432,15 @@
     </div>
   </div>
 </section>
+
+<!-- ── COUNTDOWN ── -->
+<div class="countdown-strip">
+  <div class="countdown-inner">
+    <span class="countdown-badge">Precio lanzamiento</span>
+    <span class="countdown-label">Oferta termina en:</span>
+    <span class="countdown-timer" id="countdown">23:59:59</span>
+  </div>
+</div>
 
 <!-- ── PARA QUIÉN ── -->
 <section class="para-quien">
@@ -619,7 +645,7 @@
     <div class="precio-inner">
       <div class="precio-card reveal">
         <div class="precio-card-content">
-          <span class="precio-badge">Precio de lanzamiento</span>
+          <span class="precio-badge">Precio lanzamiento</span>
           <p class="precio-label">Valor total del programa</p>
           <p class="precio-old">USD 29</p>
           <p class="precio-new"><span>USD</span> 17</p>
@@ -765,6 +791,31 @@
     document.querySelectorAll('.faq-question').forEach(b => b.classList.remove('active'));
     if (!isOpen) { answer.classList.add('open'); btn.classList.add('active'); }
   }
+
+  // Countdown — 24hs desde primera visita, persiste en localStorage
+  (function() {
+    const KEY = 'cd_expiry';
+    const DAY = 24 * 60 * 60 * 1000;
+    let expiry = parseInt(localStorage.getItem(KEY));
+    if (!expiry || Date.now() > expiry) {
+      expiry = Date.now() + DAY;
+      localStorage.setItem(KEY, expiry);
+    }
+    function tick() {
+      const diff = Math.max(0, expiry - Date.now());
+      if (diff === 0) {
+        expiry = Date.now() + DAY;
+        localStorage.setItem(KEY, expiry);
+      }
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      const el = document.getElementById('countdown');
+      if (el) el.textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
 </script>
 <script type="text/javascript">
   (function(){ var s=document.createElement('script'); s.src='https://static.hotmart.com/checkout/widget.min.js'; document.head.appendChild(s); })();
