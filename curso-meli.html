@@ -386,6 +386,46 @@
       .price-badge { white-space: nowrap; }
       .tag { font-size: .65rem; padding: 5px 12px; white-space: nowrap; }
     }
+    /* ── HERO 2-COL ── */
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .course-mockup { display: none; } }
+
+    /* ── PRICE OFF BADGE ── */
+    .price-off { background: #e53e3e; color: #fff; border-radius: 6px; padding: 4px 10px; font-size: .75rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+
+    /* ── PRECIO BADGES ── */
+    .precio-badges { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 28px; }
+    .precio-badge { margin-bottom: 0 !important; }
+    .precio-off-badge { background: #e53e3e; color: #fff; font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; }
+
+    /* ── COURSE MOCKUP ── */
+    .course-mockup { display: flex; align-items: center; justify-content: center; }
+    .mockup-card {
+      background: #141414; border: 1px solid rgba(255,255,255,.1); border-radius: 24px; overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.04), inset 0 1px 0 rgba(255,255,255,.06);
+      transform: perspective(900px) rotateY(-8deg) rotateX(3deg); transition: transform .5s ease; width: 100%; max-width: 360px;
+    }
+    .mockup-card:hover { transform: perspective(900px) rotateY(-4deg) rotateX(1deg); }
+    .mockup-header {
+      background: linear-gradient(135deg, rgba(200,241,53,.12) 0%, rgba(200,241,53,.03) 100%);
+      padding: 36px 28px 28px; border-bottom: 1px solid rgba(255,255,255,.06); position: relative; overflow: hidden;
+    }
+    .mockup-header::before { content: ''; position: absolute; top: -30px; right: -30px; width: 140px; height: 140px; background: radial-gradient(circle, rgba(200,241,53,.18) 0%, transparent 70%); }
+    .mockup-kicker { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .mockup-title { font-family: var(--font-brand); font-size: 1.4rem; font-weight: 800; line-height: 1.1; letter-spacing: -.03em; position: relative; z-index: 1; }
+    .mockup-title span { color: var(--accent); }
+    .mockup-sub { font-size: .72rem; color: var(--gray-3); margin-top: 8px; position: relative; z-index: 1; }
+    .mockup-body { padding: 20px 28px; }
+    .mockup-modules { display: flex; flex-direction: column; gap: 9px; margin-bottom: 4px; }
+    .mockup-module { display: flex; align-items: center; gap: 10px; }
+    .mod-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; opacity: .7; }
+    .mod-bar { height: 5px; border-radius: 3px; background: rgba(255,255,255,.06); flex: 1; overflow: hidden; }
+    .mod-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent), rgba(200,241,53,.4)); }
+    .mod-label { font-size: .66rem; color: var(--gray-3); white-space: nowrap; width: 54px; }
+    .mockup-footer { display: flex; align-items: center; justify-content: space-between; padding: 14px 28px; border-top: 1px solid rgba(255,255,255,.05); background: rgba(255,255,255,.02); }
+    .mockup-brand { font-family: var(--font-brand); font-size: .7rem; font-weight: 800; color: var(--gray-3); }
+    .mockup-brand span { color: var(--accent); }
+    .mockup-cert { font-size: .6rem; font-weight: 700; color: var(--accent); background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.2); border-radius: 100px; padding: 3px 10px; }
   </style>
 </head>
 <body>
@@ -408,23 +448,50 @@
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge reveal">
-        <span class="tag">Programa Online · Precio lanzamiento</span>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge reveal">
+          <span class="tag">Programa Online · Precio lanzamiento</span>
+        </div>
+        <h1 class="hero-title reveal reveal-delay-1">
+          De Cero a<br><span class="highlight">Mercado Líder</span>
+        </h1>
+        <p class="hero-desc reveal reveal-delay-2">El sistema paso a paso para empezar a vender en Mercado Libre y construir una cuenta con reputación sólida. Todo lo que el 90% de los vendedores no sabe antes de publicar.</p>
+        <div class="hero-price-row reveal reveal-delay-2">
+          <span class="price-old">$49.999</span>
+          <span class="price-new">$19.999</span>
+          <span class="price-badge">Lanzamiento</span>
+          <span class="price-off">60% OFF</span>
+        </div>
+        <div class="hero-actions reveal reveal-delay-3">
+          <a href="https://pay.hotmart.com/P105820771X?checkoutMode=2&off=ww2ajlya" class="hotmart-fb hotmart__button-checkout btn btn-primary btn-lg">Acceder al programa →</a>
+        </div>
+        <p class="hero-guarantee reveal reveal-delay-3">7 días de garantía · Pago único · Acceso de por vida</p>
       </div>
-      <h1 class="hero-title reveal reveal-delay-1">
-        De Cero a<br><span class="highlight">Mercado Líder</span>
-      </h1>
-      <p class="hero-desc reveal reveal-delay-2">El sistema paso a paso para empezar a vender en Mercado Libre y construir una cuenta con reputación sólida. Todo lo que el 90% de los vendedores no sabe antes de publicar.</p>
-      <div class="hero-price-row reveal reveal-delay-2">
-        <span class="price-old">$49.999</span>
-        <span class="price-new">$19.999</span>
-        <span class="price-badge">Lanzamiento</span>
+      <div class="course-mockup reveal reveal-delay-2">
+        <div class="mockup-card">
+          <div class="mockup-header">
+            <p class="mockup-kicker">Nueva Idea MKT · Programa online</p>
+            <h3 class="mockup-title">De Cero a<br><span>Mercado Líder</span></h3>
+            <p class="mockup-sub">9 módulos · PDF + Bonuses · Acceso de por vida</p>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-modules">
+              <div class="mockup-module"><span class="mod-dot"></span><div class="mod-bar"><div class="mod-fill" style="width:100%"></div></div><span class="mod-label">Módulo 1</span></div>
+              <div class="mockup-module"><span class="mod-dot"></span><div class="mod-bar"><div class="mod-fill" style="width:100%"></div></div><span class="mod-label">Módulo 2</span></div>
+              <div class="mockup-module"><span class="mod-dot"></span><div class="mod-bar"><div class="mod-fill" style="width:100%"></div></div><span class="mod-label">Módulo 3</span></div>
+              <div class="mockup-module"><span class="mod-dot"></span><div class="mod-bar"><div class="mod-fill" style="width:100%"></div></div><span class="mod-label">Módulo 4</span></div>
+              <div class="mockup-module"><span class="mod-dot"></span><div class="mod-bar"><div class="mod-fill" style="width:100%"></div></div><span class="mod-label">Módulo 5</span></div>
+              <div class="mockup-module"><span class="mod-dot"></span><div class="mod-bar"><div class="mod-fill" style="width:100%"></div></div><span class="mod-label">Módulo 6</span></div>
+              <div class="mockup-module"><span class="mod-dot"></span><div class="mod-bar"><div class="mod-fill" style="width:100%"></div></div><span class="mod-label">Módulo 7</span></div>
+            </div>
+          </div>
+          <div class="mockup-footer">
+            <span class="mockup-brand">NUEVA IDEA <span>MKT</span></span>
+            <span class="mockup-cert">Consultora Certificada ML</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-actions reveal reveal-delay-3">
-        <a href="https://pay.hotmart.com/P105820771X?checkoutMode=2&off=ww2ajlya" class="hotmart-fb hotmart__button-checkout btn btn-primary btn-lg">Acceder al programa →</a>
-      </div>
-      <p class="hero-guarantee reveal reveal-delay-3">7 días de garantía · Pago único · Acceso de por vida</p>
     </div>
   </div>
 </section>
@@ -716,7 +783,10 @@
     <div class="precio-inner">
       <div class="precio-card reveal">
         <div class="precio-card-content">
-          <span class="precio-badge">Precio lanzamiento</span>
+          <div class="precio-badges">
+            <span class="precio-badge">Precio lanzamiento</span>
+            <span class="precio-off-badge">60% OFF</span>
+          </div>
           <p class="precio-label">Acceso completo al programa</p>
           <p class="precio-old">$49.999</p>
           <p class="precio-new">$19.999</p>
