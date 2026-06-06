@@ -391,7 +391,8 @@
     @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .course-mockup { display: none; } }
 
     /* ── PRICE OFF BADGE ── */
-    .price-off { background: #e53e3e; color: #fff; border-radius: 6px; padding: 4px 10px; font-size: .75rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+    .price-off { display: inline-block; background: #e53e3e; color: #fff; border-radius: 6px; padding: 4px 10px; font-size: .75rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 8px; }
+    .precio-old-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
 
     /* ── PRECIO BADGES ── */
     .precio-badges { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 28px; }
@@ -457,11 +458,11 @@
           De Cero a<br><span class="highlight">Mercado Líder</span>
         </h1>
         <p class="hero-desc reveal reveal-delay-2">El sistema paso a paso para empezar a vender en Mercado Libre y construir una cuenta con reputación sólida. Todo lo que el 90% de los vendedores no sabe antes de publicar.</p>
+        <span class="price-off reveal reveal-delay-2">60% OFF</span>
         <div class="hero-price-row reveal reveal-delay-2">
           <span class="price-old">$49.999</span>
           <span class="price-new">$19.999</span>
           <span class="price-badge">Lanzamiento</span>
-          <span class="price-off">60% OFF</span>
         </div>
         <div class="hero-actions reveal reveal-delay-3">
           <a href="https://pay.hotmart.com/P105820771X?checkoutMode=2&off=ww2ajlya" class="hotmart-fb hotmart__button-checkout btn btn-primary btn-lg">Acceder al programa →</a>
@@ -785,10 +786,12 @@
         <div class="precio-card-content">
           <div class="precio-badges">
             <span class="precio-badge">Precio lanzamiento</span>
-            <span class="precio-off-badge">60% OFF</span>
           </div>
           <p class="precio-label">Acceso completo al programa</p>
-          <p class="precio-old">$49.999</p>
+          <div class="precio-old-row">
+            <p class="precio-old" style="margin-bottom:0">$49.999</p>
+            <span class="precio-off-badge">60% OFF</span>
+          </div>
           <p class="precio-new">$19.999</p>
           <p class="precio-sub">Pago único · Acceso de por vida</p>
           <div class="precio-features">
