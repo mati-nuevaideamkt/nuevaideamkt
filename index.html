@@ -56,7 +56,7 @@
       pointer-events: none; z-index: 1000; opacity: .4;
     }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; min-width: 0; }
     .section    { padding: 100px 0; }
 
     .tag {
@@ -130,12 +130,9 @@
     .hero-title {
       font-family: var(--font-brand); font-size: clamp(2.8rem, 7vw, 5.5rem);
       font-weight: 600; line-height: 1.05; letter-spacing: -.03em; margin-bottom: 24px;
+      overflow-wrap: break-word;
     }
-    .hero-title .highlight { color: var(--accent); position: relative; }
-    .hero-title .highlight::after {
-      content: ''; position: absolute; bottom: 4px; left: 0; right: 0;
-      height: 3px; background: var(--accent); opacity: .4; border-radius: 2px;
-    }
+    .hero-title .highlight { color: var(--accent); }
     .hero-desc { font-size: 1.125rem; color: var(--gray-2); max-width: 540px; margin-bottom: 40px; line-height: 1.7; }
     .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
     .hero-stats {
@@ -157,6 +154,8 @@
     .marquee-wrapper { overflow: hidden; }
     .marquee-track { display: flex; gap: 20px; animation: marquee 35s linear infinite; width: max-content; align-items: center; }
     .marquee-track.reverse { animation-direction: reverse; }
+    .marquee-group { display: flex; gap: 20px; align-items: center; flex-shrink: 0; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(var(--marquee-x, -50%)); } }
     .client-badge {
       display: flex; align-items: center; justify-content: center;
       background: #ffffff; border-radius: var(--radius-sm);
@@ -166,7 +165,6 @@
     }
     .client-badge:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
     .client-badge img { width: 100%; height: 100%; object-fit: contain; }
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* ── MARQUEE CERTIFICACIONES ── */
     .certs-section {
@@ -187,7 +185,7 @@
     /* ── SECTION HEADER ── */
     .section-header { margin-bottom: 64px; }
     .section-header .tag { margin-bottom: 20px; }
-    .section-title { font-family: var(--font-alt); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -.025em; margin-bottom: 16px; line-height: 1.15; }
+    .section-title { font-family: var(--font-brand); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -.025em; margin-bottom: 16px; line-height: 1.15; }
     .section-subtitle { font-size: 1rem; color: var(--gray-2); max-width: 500px; line-height: 1.7; }
 
     /* ── SERVICES ── */
@@ -214,61 +212,42 @@
       font-size: 1.4rem; margin-bottom: 24px; transition: background var(--transition), border-color var(--transition);
     }
     .service-card:hover .service-icon { background: rgba(200,241,53,.25); border-color: var(--accent); }
-    .service-name { font-family: var(--font-alt); font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -.01em; }
+    .service-name { font-family: var(--font-brand); font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -.01em; }
     .service-desc { font-size: .9rem; color: var(--gray-2); line-height: 1.7; margin-bottom: 24px; }
     .service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .service-tag { background: rgba(255,255,255,.05); border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px; font-size: .75rem; color: var(--gray-2); }
     .service-number { position: absolute; top: 32px; right: 32px; font-family: var(--font-alt); font-size: 3.5rem; font-weight: 800; color: rgba(255,255,255,.04); line-height: 1; }
 
-    /* ── ECOMMERCE SPECIALTY ── */
-    .ecom-section { background: var(--bg-card); }
-    .ecom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .ecom-card {
+    /* ── TESTIMONIOS ── */
+    .testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 72px; }
+    .testi-card {
       background: var(--bg); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 36px 28px;
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-      position: relative; overflow: hidden;
+      border-radius: var(--radius); padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: border-color var(--transition), transform var(--transition);
     }
-    .ecom-card::after {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(200,241,53,.05) 0%, transparent 70%);
-      opacity: 0; transition: opacity var(--transition);
+    .testi-card:hover { border-color: rgba(200,241,53,.25); transform: translateY(-3px); }
+    .testi-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.3);
+      color: var(--accent); border-radius: 100px;
+      padding: 4px 12px; font-size: .68rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; width: fit-content;
     }
-    .ecom-card:hover { border-color: rgba(200,241,53,.3); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.4); }
-    .ecom-card:hover::after { opacity: 1; }
-    .ecom-icon { font-size: 2.4rem; margin-bottom: 20px; }
-    .ecom-title { font-family: var(--font-alt); font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -.01em; }
-    .ecom-desc { font-size: .875rem; color: var(--gray-2); line-height: 1.75; }
-    .ecom-platforms { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
-    .ecom-platform { background: var(--accent-dim); border: 1px solid rgba(200,241,53,.2); color: var(--accent); border-radius: 4px; padding: 3px 10px; font-size: .72rem; font-weight: 600; letter-spacing: .05em; }
-
-    /* ── METHODOLOGY ── */
-    .method-section { background: var(--bg); }
-    .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .method-steps { display: flex; flex-direction: column; }
-    .method-step { display: flex; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--border); }
-    .method-step:first-child { padding-top: 0; }
-    .method-step:last-child { border-bottom: none; padding-bottom: 0; }
-    .step-number {
-      flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
-      border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-alt); font-size: .875rem; font-weight: 700; color: var(--gray-2);
-      transition: var(--transition); margin-top: 4px;
-    }
-    .method-step:hover .step-number { background: var(--accent); color: #000; border-color: var(--accent); }
-    .step-title { font-family: var(--font-alt); font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -.01em; }
-    .step-desc { font-size: .875rem; color: var(--gray-2); line-height: 1.7; }
-    .method-visual { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; text-align: center; position: relative; overflow: hidden; }
-    .method-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(200,241,53,.06) 0%, transparent 70%); }
-    .loop-graphic { position: relative; z-index: 1; width: 220px; height: 220px; margin: 0 auto 32px; }
-    .loop-ring { position: absolute; border-radius: 50%; border: 1.5px solid; animation: spin linear infinite; }
-    .loop-ring:nth-child(1) { inset: 0; border-color: rgba(200,241,53,.3); animation-duration: 12s; }
-    .loop-ring:nth-child(2) { inset: 20px; border-color: rgba(200,241,53,.2); animation-duration: 9s; animation-direction: reverse; }
-    .loop-ring:nth-child(3) { inset: 40px; border-color: rgba(200,241,53,.15); animation-duration: 6s; }
-    .loop-center { position: absolute; inset: 60px; background: var(--accent-dim); border: 1px solid rgba(200,241,53,.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.4rem; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .loop-label { font-family: var(--font-alt); font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-    .loop-sublabel { font-size: .8125rem; color: var(--gray-2); line-height: 1.6; }
+    .testi-badge::before { content: '✓'; }
+    .testi-badge.tn { background: rgba(64,156,255,.12); border-color: rgba(64,156,255,.4); color: #4da8ff; }
+    .testi-stars { display: flex; align-items: center; gap: 8px; }
+    .testi-stars .stars { color: #FFD700; font-size: 1rem; letter-spacing: 2px; }
+    .testi-stars .rating { font-size: .8rem; font-weight: 700; color: var(--gray-2); }
+    .testi-quote { font-size: .9375rem; color: var(--gray-1); line-height: 1.75; font-style: italic; flex: 1; }
+    .testi-author { border-top: 1px solid var(--border); padding-top: 16px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+    .testi-name { font-weight: 700; font-size: .875rem; color: var(--white); }
+    .testi-context { font-size: .78rem; color: var(--gray-3); margin-top: 2px; }
+    .testi-link { font-size: .75rem; color: var(--accent); font-weight: 600; white-space: nowrap; flex-shrink: 0; transition: opacity var(--transition); }
+    .testi-link:hover { opacity: .7; }
+    .testi-subhead { text-align: center; margin-bottom: 32px; }
+    .testi-subhead .tag { margin-bottom: 16px; }
+    .testi-subhead h3 { font-family: var(--font-brand); font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; }
 
     /* ── GROWTH BANNER ── */
     .growth-banner {
@@ -278,8 +257,13 @@
     }
     .growth-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(200,241,53,.05) 0%, transparent 70%); }
     .growth-banner-content { position: relative; z-index: 1; }
-    .growth-headline { font-family: var(--font-alt); font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: 32px; text-transform: uppercase; }
+    .growth-headline { font-family: var(--font-brand); font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: 32px; overflow-wrap: break-word; }
     .growth-headline span { color: var(--accent); }
+    .ai-logos { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .ai-logos-label { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-3); }
+    .ai-logos-row { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
+    .ai-logos-row img { height: 26px; width: auto; opacity: .9; transition: opacity var(--transition), transform var(--transition); }
+    .ai-logos-row img:hover { opacity: 1; transform: translateY(-2px); }
 
     /* ── PROCESS TIMELINE ── */
     .timeline { position: relative; max-width: 760px; margin: 0 auto; }
@@ -296,7 +280,7 @@
     .timeline-body { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; flex: 1; transition: border-color var(--transition), background var(--transition); }
     .timeline-item:hover .timeline-body { border-color: rgba(200,241,53,.25); background: var(--bg-hover); }
     .timeline-phase { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-    .timeline-title { font-family: var(--font-alt); font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .timeline-title { font-family: var(--font-brand); font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
     .timeline-desc { font-size: .875rem; color: var(--gray-2); line-height: 1.7; }
 
     /* ── CASE STUDIES ── */
@@ -310,7 +294,7 @@
     }
     .case-card:hover { border-color: rgba(200,241,53,.3); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.4); }
     .case-industry { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-2); }
-    .case-number { font-family: var(--font-brand); font-size: 4rem; font-weight: 800; color: var(--accent); line-height: 1; letter-spacing: -.03em; }
+    .case-number { font-family: var(--font-alt); font-size: 4rem; font-weight: 800; color: var(--accent); line-height: 1; letter-spacing: -.03em; }
     .case-number-label { font-size: .875rem; color: var(--gray-2); margin-top: 4px; }
     .case-divider { height: 1px; background: var(--border); }
     .case-results { display: flex; flex-direction: column; gap: 10px; }
@@ -320,13 +304,10 @@
     .case-service-tag { background: var(--accent-dim); border: 1px solid rgba(200,241,53,.2); color: var(--accent); border-radius: 4px; padding: 4px 12px; font-size: .72rem; font-weight: 600; letter-spacing: .05em; }
 
     /* ── CTA ── */
-    .cta-section { padding: 120px 0; text-align: center; background: radial-gradient(ellipse 70% 70% at 50% 100%, rgba(200,241,53,.08) 0%, transparent 70%), var(--bg); }
-    .cta-title { font-family: var(--font-alt); font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 20px; }
-    .cta-title span { color: var(--accent); }
-    .cta-subtitle { font-size: 1.1rem; color: var(--gray-2); max-width: 440px; margin: 0 auto 40px; line-height: 1.7; }
-    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     .btn-wa { background: #25D366; color: #fff; font-weight: 700; padding: 16px 32px; border-radius: var(--radius-sm); display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-main); font-size: .9375rem; letter-spacing: .02em; transition: var(--transition); border: none; cursor: pointer; }
     .btn-wa:hover { background: #20c05c; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,.3); }
+    .btn-meet { background: var(--accent); color: #000; font-weight: 700; padding: 16px 32px; border-radius: var(--radius-sm); display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-main); font-size: .9375rem; letter-spacing: .02em; transition: var(--transition); border: none; cursor: pointer; }
+    .btn-meet:hover { background: #d9ff3d; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,241,53,.35); }
 
     /* ── FOOTER ── */
     footer { border-top: 1px solid var(--border); padding: 60px 0 40px; }
@@ -360,19 +341,19 @@
     }
     .mobile-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
     .mobile-menu a {
-      font-family: var(--font-brand); font-size: 1rem; font-weight: 600;
+      font-family: var(--font-main); font-size: 1rem; font-weight: 600;
       color: var(--gray-2); padding: 14px 24px;
       transition: color var(--transition), background var(--transition);
       text-align: left; letter-spacing: .01em;
     }
     .mobile-menu a:hover { color: var(--white); background: rgba(255,255,255,.04); }
-    .mobile-menu .menu-wa {
+    .mobile-menu .menu-meet {
       margin: 8px 24px 0; padding: 13px 20px;
-      background: #25D366; color: #fff; border-radius: var(--radius-sm);
-      font-family: var(--font-brand); font-size: .875rem; font-weight: 700;
+      background: var(--accent); color: #000; border-radius: var(--radius-sm);
+      font-family: var(--font-main); font-size: .875rem; font-weight: 700;
       text-align: center; letter-spacing: .03em;
     }
-    .mobile-menu .menu-wa:hover { background: #20c05c; }
+    .mobile-menu .menu-meet:hover { background: #d9ff3d; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
@@ -382,10 +363,9 @@
       .hamburger { display: flex; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
       .hero-actions { flex-direction: column; align-items: stretch; }
-      .hero-actions .btn-wa, .hero-actions .btn-outline { width: 100%; justify-content: center; }
+      .hero-actions .btn-meet, .hero-actions .btn-outline { width: 100%; justify-content: center; }
       .services-grid { grid-template-columns: 1fr; }
-      .ecom-grid { grid-template-columns: 1fr; }
-      .method-grid { grid-template-columns: 1fr; gap: 48px; }
+      .testi-grid { grid-template-columns: 1fr; margin-bottom: 48px; }
       .cases-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; text-align: center; }
@@ -393,7 +373,6 @@
     @media (max-width: 480px) {
       .hero-title { font-size: 2.4rem; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
-      .cta-buttons { flex-direction: column; align-items: center; }
       .tag { font-size: .62rem; padding: 5px 12px; white-space: nowrap; }
     }
 
@@ -443,7 +422,6 @@
       </a>
       <ul class="nav-links">
         <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#ecommerce">E-commerce</a></li>
         <li><a href="#casos">Casos</a></li>
         <li><a href="#metodologia">Metodología</a></li>
       </ul>
@@ -457,17 +435,16 @@
         <a href="mailto:mati@nuevaideamkt.com" aria-label="Email">
           <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </a>
-        <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="btn btn-primary" style="padding:10px 20px;font-size:.8125rem;">RESERVAR UNA LLAMADA</a>
+        <a href="https://calendar.app.google/JMd2EUuqsPeHuLcx6" target="_blank" rel="noopener" class="btn btn-primary" style="padding:10px 20px;font-size:.8125rem;">AGENDAR UNA LLAMADA</a>
       </div>
       <div class="hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></div>
     </div>
     <!-- MOBILE MENU (dropdown) -->
     <div class="mobile-menu" id="mobileMenu">
       <a href="#servicios"   onclick="closeMobile()">Servicios</a>
-      <a href="#ecommerce"   onclick="closeMobile()">E-commerce</a>
       <a href="#casos"       onclick="closeMobile()">Casos</a>
       <a href="#metodologia" onclick="closeMobile()">Metodología</a>
-      <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="menu-wa" onclick="closeMobile()">RESERVAR UNA LLAMADA</a>
+      <a href="https://calendar.app.google/JMd2EUuqsPeHuLcx6" target="_blank" rel="noopener" class="menu-meet" onclick="closeMobile()">AGENDAR UNA LLAMADA</a>
     </div>
   </nav>
 
@@ -479,22 +456,22 @@
       <div class="hero-content">
         <div class="hero-badge reveal"><span class="tag">E-commerce Experts · Growth Partner</span></div>
         <h1 class="hero-title reveal reveal-delay-1">
-          Rompemos el<br><span class="highlight">techo</span> de tu<br>negocio digital
+          Somos tu<br><span class="highlight">socio estratégico</span><br>para escalar tu canal digital
         </h1>
         <p class="hero-desc reveal reveal-delay-2">
-          Para negocios estancados o con techo de crecimiento en el canal digital. Amplificamos lo que ya tenés y, si no tenés presencia digital, la creamos desde cero.
+          Nos metemos en tu negocio de lleno. Estrategia, ejecución y tecnología para romper el techo de crecimiento de tu operación digital.
         </p>
         <div class="hero-actions reveal reveal-delay-3">
-          <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="btn-wa">
-            <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            RESERVAR UNA LLAMADA
+          <a href="https://calendar.app.google/JMd2EUuqsPeHuLcx6" target="_blank" rel="noopener" class="btn-meet">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            AGENDAR UNA LLAMADA
           </a>
           <a href="#servicios" class="btn btn-outline">Ver servicios &darr;</a>
         </div>
         <div class="hero-stats reveal reveal-delay-4">
-          <div class="stat-item"><div class="stat-number">+50</div><div class="stat-label">Proyectos trabajados</div></div>
-          <div class="stat-item"><div class="stat-number">3x</div><div class="stat-label">Crecimiento promedio</div></div>
-          <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Sistemas activos</div></div>
+          <div class="stat-item"><div class="stat-number">+75</div><div class="stat-label">Proyectos trabajados</div></div>
+          <div class="stat-item"><div class="stat-number">9x</div><div class="stat-label">Crecimiento promedio</div></div>
+          <div class="stat-item"><div class="stat-number">IA</div><div class="stat-label">Aplicada a tu negocio</div></div>
           <div class="stat-item"><div class="stat-number">+110%</div><div class="stat-label">Resultado promedio</div></div>
         </div>
       </div>
@@ -512,22 +489,22 @@
       <div class="services-grid">
         <div class="service-card reveal">
           <div class="service-number">01</div>
-          <div class="service-icon">🧭</div>
-          <h3 class="service-name">Consultoría Personalizada</h3>
-          <p class="service-desc">Diagnóstico profundo de tu negocio para identificar oportunidades de crecimiento y cuellos de botella que frenan tus resultados.</p>
-          <div class="service-tags"><span class="service-tag">Auditoría digital</span><span class="service-tag">Benchmarking</span><span class="service-tag">KPIs</span></div>
+          <div class="service-icon">🛒</div>
+          <h3 class="service-name">Consultoría ventas online</h3>
+          <p class="service-desc">Diagnóstico y acompañamiento estratégico para vender más en Mercado Libre y Tienda Nube: detectamos qué frena tus resultados y armamos el plan para destrabarlo.</p>
+          <div class="service-tags"><span class="service-tag">Mercado Libre</span><span class="service-tag">Tienda Nube</span><span class="service-tag">Auditoría digital</span></div>
         </div>
         <div class="service-card reveal reveal-delay-1">
           <div class="service-number">02</div>
-          <div class="service-icon">🗺️</div>
-          <h3 class="service-name">Desarrollo Estratégico</h3>
-          <p class="service-desc">Construimos un roadmap de crecimiento por etapas con entregables claros, métricas medibles y proyección de resultados real.</p>
-          <div class="service-tags"><span class="service-tag">Roadmap</span><span class="service-tag">OKRs</span><span class="service-tag">Growth loops</span></div>
+          <div class="service-icon">🖥️</div>
+          <h3 class="service-name">Optimización web y conversión</h3>
+          <p class="service-desc">Rediseño de tienda y páginas de producto para subir la conversión: widgets de urgencia, productos complementarios y una experiencia de compra más simple de principio a fin.</p>
+          <div class="service-tags"><span class="service-tag">CRO</span><span class="service-tag">Widgets</span><span class="service-tag">Urgencia</span><span class="service-tag">Cross-selling</span></div>
         </div>
         <div class="service-card reveal reveal-delay-2">
           <div class="service-number">03</div>
           <div class="service-icon">📣</div>
-          <h3 class="service-name">Campañas Publicitarias</h3>
+          <h3 class="service-name">Campañas publicitarias</h3>
           <p class="service-desc">Creación, gestión y optimización de campañas en Meta, Google y TikTok Ads orientadas a resultados medibles y ROI positivo.</p>
           <div class="service-tags"><span class="service-tag">Meta Ads</span><span class="service-tag">Google Ads</span><span class="service-tag">TikTok Ads</span></div>
         </div>
@@ -546,197 +523,108 @@
   <div class="marquee-section">
     <p class="marquee-label">Empresas que confiaron en nosotros</p>
     <div class="marquee-wrapper">
-      <div class="marquee-track">
-        <div class="client-badge"><img src="assets/clients/open25hs.png"      alt="Open 25 HS" /></div>
-        <div class="client-badge"><img src="assets/clients/caece.png"          alt="Universidad CAECE" /></div>
-        <div class="client-badge"><img src="assets/clients/emovere.png"        alt="Emovere" /></div>
-        <div class="client-badge"><img src="assets/clients/generalcandies.png" alt="General Candies" /></div>
-        <div class="client-badge"><img src="assets/clients/warp.png"           alt="Warp Estudios" /></div>
-        <div class="client-badge"><img src="assets/clients/gorriti.png"        alt="Gorriti Art Center" /></div>
-        <div class="client-badge"><img src="assets/clients/zittana.png"        alt="Zittana Textil" /></div>
-        <div class="client-badge"><img src="assets/clients/open25hs.png"      alt="Open 25 HS" /></div>
-        <div class="client-badge"><img src="assets/clients/caece.png"          alt="Universidad CAECE" /></div>
-        <div class="client-badge"><img src="assets/clients/emovere.png"        alt="Emovere" /></div>
-        <div class="client-badge"><img src="assets/clients/generalcandies.png" alt="General Candies" /></div>
-        <div class="client-badge"><img src="assets/clients/warp.png"           alt="Warp Estudios" /></div>
-        <div class="client-badge"><img src="assets/clients/gorriti.png"        alt="Gorriti Art Center" /></div>
-        <div class="client-badge"><img src="assets/clients/zittana.png"        alt="Zittana Textil" /></div>
+      <div class="marquee-track" data-marquee>
+        <div class="marquee-group">
+          <div class="client-badge"><img src="assets/clients/open25hs.png"      alt="Open 25 HS" /></div>
+          <div class="client-badge"><img src="assets/clients/caece.png"          alt="Universidad CAECE" /></div>
+          <div class="client-badge"><img src="assets/clients/emovere.png"        alt="Emovere" /></div>
+          <div class="client-badge"><img src="assets/clients/generalcandies.png" alt="General Candies" /></div>
+          <div class="client-badge"><img src="assets/clients/warp.png"           alt="Warp Estudios" /></div>
+          <div class="client-badge"><img src="assets/clients/gorriti.png"        alt="Gorriti Art Center" /></div>
+          <div class="client-badge"><img src="assets/clients/zittana.png"        alt="Zittana Textil" /></div>
+          <div class="client-badge"><img src="assets/clients/district.png"      alt="District" /></div>
+          <div class="client-badge"><img src="assets/clients/dindan.png"        alt="Dindan" /></div>
+          <div class="client-badge"><img src="assets/clients/solocamperas.png"  alt="Solo Camperas" /></div>
+          <div class="client-badge"><img src="assets/clients/oasis.png"         alt="Oasis" /></div>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <div class="client-badge"><img src="assets/clients/open25hs.png"      alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/caece.png"          alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/emovere.png"        alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/generalcandies.png" alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/warp.png"           alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/gorriti.png"        alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/zittana.png"        alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/district.png"      alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/dindan.png"        alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/solocamperas.png"  alt="" /></div>
+          <div class="client-badge"><img src="assets/clients/oasis.png"         alt="" /></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ECOMMERCE SPECIALTY -->
-  <section class="section ecom-section" id="ecommerce">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="tag">Especialidad · E-commerce</span>
-        <h2 class="section-title">Expertos en ventas online</h2>
-        <p class="section-subtitle">Si ya vendés online y tenés un techo, lo rompemos. Si todavía no tenés canal digital, lo creamos.</p>
-      </div>
-      <div class="ecom-grid">
-        <div class="ecom-card reveal">
-          <div class="ecom-icon">📈</div>
-          <h3 class="ecom-title">Amplificamos tu canal digital</h3>
-          <p class="ecom-desc">Si ya vendés online pero sentís que llegaste a un techo, entramos para escalar tu operación, mejorar la rentabilidad y romper esa barrera de crecimiento.</p>
-          <div class="ecom-platforms">
-            <span class="ecom-platform">Mercado Libre</span>
-            <span class="ecom-platform">Tienda propia</span>
-            <span class="ecom-platform">Marketplaces</span>
-          </div>
-        </div>
-        <div class="ecom-card reveal reveal-delay-1">
-          <div class="ecom-icon">🛒</div>
-          <h3 class="ecom-title">Creamos tu presencia digital</h3>
-          <p class="ecom-desc">Si todavía no tenés canal digital, lo construimos desde cero: estrategia, plataforma, operación y primeras ventas. Del cero al primer ingreso online.</p>
-          <div class="ecom-platforms">
-            <span class="ecom-platform">Rappi</span>
-            <span class="ecom-platform">Pedidos Ya</span>
-            <span class="ecom-platform">Tienda Nube</span>
-          </div>
-        </div>
-        <div class="ecom-card reveal reveal-delay-2">
-          <div class="ecom-icon">📊</div>
-          <h3 class="ecom-title">Dashboards & Rentabilidad</h3>
-          <p class="ecom-desc">Visualizamos costos, ingresos, egresos y proyecciones en dashboards claros para que tomes decisiones con datos reales, no intuición.</p>
-          <div class="ecom-platforms">
-            <span class="ecom-platform">KPIs en tiempo real</span>
-            <span class="ecom-platform">Proyecciones</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MARQUEE CERTIFICACIONES -->
-  <div class="certs-section">
-    <p class="certs-label">Certificaciones y partnerships oficiales</p>
-    <div class="marquee-wrapper">
-      <div class="marquee-track reverse" style="animation-duration:20s;">
-        <div class="cert-badge"><img src="assets/certs/meta_bp.png"      alt="Meta Business Partner" /></div>
-        <div class="cert-badge"><img src="assets/certs/facebook_mp.png"  alt="Facebook Marketing Partner" /></div>
-        <div class="cert-badge"><img src="assets/certs/googleads.png"    alt="Google Ads Certified Partner" /></div>
-        <div class="cert-badge"><img src="assets/certs/tiendanube.png"   alt="Tienda Nube Partners" /></div>
-        <div class="cert-badge"><img src="assets/certs/ml_cert.png"      alt="Mercado Libre Consultora Certificada" /></div>
-        <div class="cert-badge"><img src="assets/certs/meta_bp.png"      alt="Meta Business Partner" /></div>
-        <div class="cert-badge"><img src="assets/certs/facebook_mp.png"  alt="Facebook Marketing Partner" /></div>
-        <div class="cert-badge"><img src="assets/certs/googleads.png"    alt="Google Ads Certified Partner" /></div>
-        <div class="cert-badge"><img src="assets/certs/tiendanube.png"   alt="Tienda Nube Partners" /></div>
-        <div class="cert-badge"><img src="assets/certs/ml_cert.png"      alt="Mercado Libre Consultora Certificada" /></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- METHODOLOGY -->
-  <section class="section method-section" id="metodologia">
-    <div class="container">
-      <div class="method-grid">
-        <div>
-          <div class="section-header reveal">
-            <span class="tag">Metodología</span>
-            <h2 class="section-title">¿Cómo lo hacemos?</h2>
-            <p class="section-subtitle">Un proceso probado que convierte el potencial de tu negocio en resultados reales y sostenibles.</p>
-          </div>
-          <div class="method-steps">
-            <div class="method-step reveal">
-              <div class="step-number">1</div>
-              <div class="step-content">
-                <h3 class="step-title">Análisis Inicial y Diagnóstico</h3>
-                <p class="step-desc">Entendemos la situación actual de tu negocio, analizamos la competencia y detectamos las oportunidades de mayor impacto.</p>
-              </div>
-            </div>
-            <div class="method-step reveal reveal-delay-1">
-              <div class="step-number">2</div>
-              <div class="step-content">
-                <h3 class="step-title">Roadmap Estratégico</h3>
-                <p class="step-desc">Plan de acción detallado por etapas con entregables claros, responsables definidos y fechas comprometidas.</p>
-              </div>
-            </div>
-            <div class="method-step reveal reveal-delay-2">
-              <div class="step-number">3</div>
-              <div class="step-content">
-                <h3 class="step-title">Proyección de Resultados</h3>
-                <p class="step-desc">Visualización clara de los logros esperados con métricas reales y reportes periódicos de avance.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="method-visual reveal reveal-delay-1">
-          <div class="loop-graphic">
-            <div class="loop-ring"></div><div class="loop-ring"></div><div class="loop-ring"></div>
-            <div class="loop-center">🔁</div>
-          </div>
-          <div class="loop-label">Growth Loop Activado</div>
-          <div class="loop-sublabel">Tu negocio generando resultados<br>de forma automática y constante.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GROWTH BANNER -->
-  <div class="growth-banner">
-    <div class="container growth-banner-content">
-      <h2 class="growth-headline reveal">
-        Creamos <span>growth loops</span> para que<br>tu negocio funcione las <span>24hs</span> los <span>365 días</span>
-      </h2>
-      <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="btn-wa reveal reveal-delay-1">
-        <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        QUIERO SABER MÁS
-      </a>
-    </div>
-  </div>
-
-  <!-- PROCESS TIMELINE -->
-  <section class="section" id="proceso">
-    <div class="container">
-      <div class="section-header reveal" style="text-align:center;align-items:center;display:flex;flex-direction:column;">
-        <span class="tag">Proceso</span>
-        <h2 class="section-title">De la primera llamada<br>a resultados reales</h2>
-        <p class="section-subtitle" style="text-align:center;">Así es el camino desde que nos contactás hasta que tu negocio está creciendo en piloto automático.</p>
-      </div>
-      <div class="timeline">
-        <div class="timeline-item reveal">
-          <div class="timeline-dot">📞</div>
-          <div class="timeline-body">
-            <div class="timeline-phase">Paso 01</div>
-            <h3 class="timeline-title">Llamada de Diagnóstico</h3>
-            <p class="timeline-desc">Analizamos tu negocio, objetivos y situación actual en una llamada de 45 minutos sin costo ni compromiso.</p>
-          </div>
-        </div>
-        <div class="timeline-item reveal reveal-delay-1">
-          <div class="timeline-dot">📋</div>
-          <div class="timeline-body">
-            <div class="timeline-phase">Paso 02</div>
-            <h3 class="timeline-title">Propuesta Personalizada</h3>
-            <p class="timeline-desc">Desarrollamos una propuesta estratégica a medida con proyección de resultados, plazos y métricas claras.</p>
-          </div>
-        </div>
-        <div class="timeline-item reveal reveal-delay-2">
-          <div class="timeline-dot">🚀</div>
-          <div class="timeline-body">
-            <div class="timeline-phase">Paso 03</div>
-            <h3 class="timeline-title">Onboarding y Lanzamiento</h3>
-            <p class="timeline-desc">Configuramos todos los sistemas, creamos los activos necesarios y lanzamos las primeras acciones de crecimiento.</p>
-          </div>
-        </div>
-        <div class="timeline-item reveal reveal-delay-3">
-          <div class="timeline-dot">📈</div>
-          <div class="timeline-body">
-            <div class="timeline-phase">Paso 04</div>
-            <h3 class="timeline-title">Optimización Continua</h3>
-            <p class="timeline-desc">Iteramos, medimos y mejoramos cada semana. Reportes claros y comunicación constante para que veas el progreso en tiempo real.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CASE STUDIES -->
+  <!-- TESTIMONIOS + CASOS -->
   <section class="section cases-section" id="casos">
     <div class="container">
       <div class="section-header reveal">
+        <span class="tag">Clientes que lo avalan</span>
+        <h2 class="section-title">Negocios reales,<br>resultados reales</h2>
+        <p class="section-subtitle">Lo que dicen las empresas con las que trabajamos día a día, en Mercado Libre y en Tienda Nube.</p>
+      </div>
+      <div class="testi-grid">
+
+        <!-- OPEN25HS · ML -->
+        <div class="testi-card reveal">
+          <span class="testi-badge">Tienda Oficial ML</span>
+          <div class="testi-stars"><span class="stars">★★★★★</span><span class="rating">5/5</span></div>
+          <p class="testi-quote">"Mati construyó nuestro canal online desde cero. Armó el equipo, definió la estrategia y hoy sigue siendo la persona que marca el norte de nuestro negocio digital. No es un proveedor — es parte del negocio."</p>
+          <div class="testi-author">
+            <div>
+              <p class="testi-name">Esteban L.</p>
+              <p class="testi-context">Gerente comercial · Open25hs!</p>
+            </div>
+            <a href="https://www.mercadolibre.com.ar/tienda/open-25-hs" target="_blank" rel="noopener" class="testi-link">Ver tienda →</a>
+          </div>
+        </div>
+
+        <!-- GENERAL CANDIES · ML -->
+        <div class="testi-card reveal reveal-delay-1">
+          <span class="testi-badge">Tienda Oficial ML</span>
+          <div class="testi-stars"><span class="stars">★★★★★</span><span class="rating">5/5</span></div>
+          <p class="testi-quote">"Desde el primer contacto entendió el negocio mejor de lo que yo esperaba. Se mete, ejecuta y te explica cada decisión. Con él el desembarco en Mercado Libre dejó de ser algo difuso y se convirtió en un plan concreto."</p>
+          <div class="testi-author">
+            <div>
+              <p class="testi-name">David M.</p>
+              <p class="testi-context">Dueño / Director · General Candies</p>
+            </div>
+            <a href="https://www.mercadolibre.com.ar/tienda/general-candies" target="_blank" rel="noopener" class="testi-link">Ver tienda →</a>
+          </div>
+        </div>
+
+        <!-- DINDAN · TIENDA NUBE -->
+        <div class="testi-card reveal reveal-delay-2">
+          <span class="testi-badge tn">Tienda Nube</span>
+          <div class="testi-stars"><span class="stars">★★★★★</span><span class="rating">5/5</span></div>
+          <p class="testi-quote">"Nos optimizó la web y sumó widgets que hoy son parte natural del proceso de compra. La conversión y la facturación de la tienda subieron, y la experiencia de compra para el cliente mejoró un montón. Se nota que entendió el negocio desde el día uno."</p>
+          <div class="testi-author">
+            <div>
+              <p class="testi-name">Tomás A.</p>
+              <p class="testi-context">Fundador · DinDan</p>
+            </div>
+            <a href="https://www.dindanmallas.com.ar/" target="_blank" rel="noopener" class="testi-link">Ver tienda →</a>
+          </div>
+        </div>
+
+        <!-- FARMACIA OASIS · TIENDA NUBE -->
+        <div class="testi-card reveal reveal-delay-3">
+          <span class="testi-badge tn">Tienda Nube</span>
+          <div class="testi-stars"><span class="stars">★★★★★</span><span class="rating">5/5</span></div>
+          <p class="testi-quote">"Necesitábamos que la web no solo se viera bien, sino que vendiera más. Con la optimización y los widgets que sumó, la conversión y la facturación online crecieron, y hoy nuestros clientes navegan la farmacia sin fricciones."</p>
+          <div class="testi-author">
+            <div>
+              <p class="testi-name">Silvia</p>
+              <p class="testi-context">Dueña / Farmacéutica · Farmacia Oasis</p>
+            </div>
+            <a href="https://www.farmaciaoasis.com.ar/" target="_blank" rel="noopener" class="testi-link">Ver tienda →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="testi-subhead reveal">
         <span class="tag">Casos de Éxito</span>
-        <h2 class="section-title">Resultados reales,<br>números concretos</h2>
-        <p class="section-subtitle">Proyectos donde transformamos el canal digital en el motor de crecimiento del negocio.</p>
+        <h3>Resultados en números</h3>
       </div>
       <div class="cases-grid">
 
@@ -802,23 +690,94 @@
     </div>
   </section>
 
-  <!-- CTA FINAL -->
-  <section class="cta-section" id="contacto">
+  <!-- MARQUEE CERTIFICACIONES -->
+  <div class="certs-section">
+    <p class="certs-label">Certificaciones y partnerships oficiales</p>
+    <div class="marquee-wrapper">
+      <div class="marquee-track reverse" style="animation-duration:20s;" data-marquee>
+        <div class="marquee-group">
+          <div class="cert-badge"><img src="assets/certs/meta_bp.png"      alt="Meta Business Partner" /></div>
+          <div class="cert-badge"><img src="assets/certs/facebook_mp.png"  alt="Facebook Marketing Partner" /></div>
+          <div class="cert-badge"><img src="assets/certs/googleads.png"    alt="Google Ads Certified Partner" /></div>
+          <div class="cert-badge"><img src="assets/certs/tiendanube.png"   alt="Tienda Nube Partners" /></div>
+          <div class="cert-badge"><img src="assets/certs/ml_cert.png"      alt="Mercado Libre Consultora Certificada" /></div>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <div class="cert-badge"><img src="assets/certs/meta_bp.png"      alt="" /></div>
+          <div class="cert-badge"><img src="assets/certs/facebook_mp.png"  alt="" /></div>
+          <div class="cert-badge"><img src="assets/certs/googleads.png"    alt="" /></div>
+          <div class="cert-badge"><img src="assets/certs/tiendanube.png"   alt="" /></div>
+          <div class="cert-badge"><img src="assets/certs/ml_cert.png"      alt="" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METODOLOGÍA + PROCESO (unificado) -->
+  <section class="section" id="metodologia">
     <div class="container">
-      <h2 class="cta-title reveal">¿Listo para <span>romper el techo</span><br>de tu negocio?</h2>
-      <p class="cta-subtitle reveal reveal-delay-1">Agendá una llamada gratuita de 45 minutos y descubrí cómo podemos escalar tu canal digital.</p>
-      <div class="cta-buttons reveal reveal-delay-2">
-        <a href="https://wa.me/541161645759" target="_blank" rel="noopener" class="btn-wa">
-          <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          RESERVAR UNA LLAMADA
-        </a>
-        <a href="mailto:mati@nuevaideamkt.com" class="btn btn-outline">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Enviar un email
-        </a>
+      <div class="section-header reveal" style="text-align:center;align-items:center;display:flex;flex-direction:column;">
+        <span class="tag">Metodología</span>
+        <h2 class="section-title">¿Cómo lo hacemos?</h2>
+        <p class="section-subtitle" style="text-align:center;">El camino completo, desde el primer contacto hasta un negocio funcionando en growth loop constante.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">📞</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 01</div>
+            <h3 class="timeline-title">Diagnóstico</h3>
+            <p class="timeline-desc">Analizamos tu negocio, la competencia y detectamos las oportunidades de mayor impacto en una llamada de 15 minutos, sin costo ni compromiso.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-1">
+          <div class="timeline-dot">🗺️</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 02</div>
+            <h3 class="timeline-title">Estrategia y propuesta</h3>
+            <p class="timeline-desc">Plan de acción por etapas con entregables claros, plazos definidos y proyección de resultados real.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-2">
+          <div class="timeline-dot">🚀</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 03</div>
+            <h3 class="timeline-title">Lanzamiento</h3>
+            <p class="timeline-desc">Configuramos los sistemas, creamos los activos necesarios y lanzamos las primeras acciones de crecimiento.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-3">
+          <div class="timeline-dot">🔁</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 04</div>
+            <h3 class="timeline-title">Optimización continua</h3>
+            <p class="timeline-desc">Iteramos y medimos cada semana con reportes claros: tu negocio funcionando en growth loop, de forma constante.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- GROWTH BANNER -->
+  <div class="growth-banner">
+    <div class="container growth-banner-content">
+      <h2 class="growth-headline reveal">
+        Planificamos, ejecutamos, medimos y analizamos resultados: así trabajamos, todo potenciado por <span>inteligencia artificial</span>.
+      </h2>
+      <a href="https://calendar.app.google/JMd2EUuqsPeHuLcx6" target="_blank" rel="noopener" class="btn-meet reveal reveal-delay-1">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        AGENDAR UNA LLAMADA
+      </a>
+      <div class="ai-logos reveal reveal-delay-2">
+        <span class="ai-logos-label">Potenciado con</span>
+        <div class="ai-logos-row">
+          <img src="assets/ai/claude.webp" alt="Claude (Anthropic)" />
+          <img src="assets/ai/chatgpt.webp" alt="ChatGPT (OpenAI)" />
+          <img src="assets/ai/gemini.webp" alt="Gemini (Google)" />
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- COURSE STRIP -->
   <div class="course-strip">
@@ -867,10 +826,8 @@
         <div>
           <div class="footer-col-title">Empresa</div>
           <ul class="footer-links">
-            <li><a href="#ecommerce">E-commerce</a></li>
             <li><a href="#metodologia">Metodología</a></li>
             <li><a href="#casos">Casos de Éxito</a></li>
-            <li><a href="#proceso">Proceso</a></li>
           </ul>
         </div>
         <div>
@@ -890,12 +847,57 @@
   </footer>
 
   <script>
+    function setupMarquees() {
+      document.querySelectorAll('[data-marquee]').forEach(track => {
+        const group = track.querySelector('.marquee-group');
+        if (!group) return;
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        const distance = group.getBoundingClientRect().width + gap;
+        if (distance > 0) track.style.setProperty('--marquee-x', `-${distance}px`);
+      });
+    }
+    setupMarquees();
+    window.addEventListener('resize', setupMarquees);
+    window.addEventListener('load', setupMarquees);
+
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
 
+    function animateCount(el) {
+      const raw = el.textContent.trim();
+      const match = raw.match(/^([+\-#]*)(\d+(?:\.\d+)?)(.*)$/);
+      if (!match) return;
+      const [, prefix, numStr, suffix] = match;
+      const target = parseFloat(numStr);
+      const decimals = numStr.includes('.') ? numStr.split('.')[1].length : 0;
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = raw;
+      }
+      requestAnimationFrame(tick);
+    }
+    function getRevealDelay(el) {
+      const m = el.className.match(/reveal-delay-(\d)/);
+      return m ? parseInt(m[1], 10) * 100 : 0;
+    }
+
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          const delay = getRevealDelay(e.target);
+          e.target.querySelectorAll('.stat-number, .case-number').forEach(el => {
+            setTimeout(() => animateCount(el), delay + 250);
+          });
+          observer.unobserve(e.target);
+        }
+      });
     }, { threshold: 0.12 });
     reveals.forEach(el => observer.observe(el));
 
