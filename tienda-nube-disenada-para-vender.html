@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Optimizamos tu Tienda Nube por completo: diseño, widgets de conversión y automatizaciones a medida de tu marca. Partner oficial WIGY." />
+  <meta property="og:title" content="Tu Tienda Nube, Diseñada para Vender — Nueva Idea MKT" />
+  <meta property="og:description" content="Diseño, widgets de conversión y automatizaciones a medida de tu marca. Partner oficial WIGY · Tienda Nube." />
+  <meta property="og:type" content="website" />
+  <title>Tu Tienda Nube, Diseñada para Vender — Nueva Idea MKT</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@500;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0a0a0a;
+      --bg-card:    #111111;
+      --bg-hover:   #1a1a1a;
+      --border:     rgba(255,255,255,.08);
+      --accent:     #c8f135;
+      --accent-dim: rgba(200,241,53,.15);
+      --white:      #ffffff;
+      --gray-1:     #f0f0f0;
+      --gray-2:     #a0a0a0;
+      --gray-3:     #555555;
+      --font-main:  'Inter', sans-serif;
+      --font-alt:   'Space Grotesk', sans-serif;
+      --font-brand: 'Poppins', sans-serif;
+      --radius:     16px;
+      --radius-sm:  8px;
+      --transition: .3s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--white); font-family: var(--font-main); line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: var(--accent); color: #000; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: .4;
+    }
+
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; min-width: 0; }
+    .section { padding: 96px 0; }
+
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-dim); border: 1px solid var(--accent);
+      color: var(--accent); border-radius: 100px;
+      padding: 6px 16px; font-size: .75rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .tag::before { content: '●'; font-size: .5rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 32px; border-radius: var(--radius-sm);
+      font-family: var(--font-main); font-weight: 700; font-size: .9375rem;
+      letter-spacing: .02em; cursor: pointer; border: none; transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--white); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-wa { background: #25D366; color: #fff; }
+    .btn-wa:hover { background: #20c05c; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,.35); }
+    .wa-svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    .section-header { margin-bottom: 56px; }
+    .section-header .tag { margin-bottom: 18px; }
+    .section-title { font-family: var(--font-brand); font-size: clamp(1.9rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -.02em; margin-bottom: 14px; line-height: 1.2; }
+    .section-subtitle { font-size: 1rem; color: var(--gray-2); max-width: 560px; line-height: 1.7; }
+
+    /* ── NAVBAR ── */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 18px 0; transition: background var(--transition), backdrop-filter var(--transition), padding var(--transition); }
+    .navbar.scrolled { background: rgba(10,10,10,.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 12px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { height: 30px; width: auto; }
+    .nav-logo-text { font-family: var(--font-brand); font-weight: 800; font-size: 1rem; letter-spacing: -.01em; }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: .875rem; font-weight: 500; color: var(--gray-2); transition: color var(--transition); }
+    .nav-links a:hover { color: var(--white); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    .mobile-menu {
+      position: absolute; top: 100%; left: 0; right: 0; z-index: 850;
+      background: rgba(10,10,10,.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column; padding: 8px 0 16px;
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity .25s ease, visibility .25s ease, transform .25s ease;
+    }
+    .mobile-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .mobile-menu a { font-family: var(--font-main); font-size: 1rem; font-weight: 600; color: var(--gray-2); padding: 14px 24px; transition: color var(--transition), background var(--transition); text-align: left; }
+    .mobile-menu a:hover { color: var(--white); background: rgba(255,255,255,.04); }
+    .mobile-menu .menu-wa { margin: 8px 24px 0; padding: 13px 20px; background: #25D366; color: #fff; border-radius: var(--radius-sm); font-size: .875rem; font-weight: 700; text-align: center; }
+
+    /* ── HERO ── */
+    .hero { min-height: 92vh; display: flex; align-items: center; padding: 120px 0 64px; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,241,53,.09) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 90% 60%, rgba(200,241,53,.04) 0%, transparent 60%); }
+    .hero-grid { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 10%, transparent 80%); }
+    .hero-inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; position: relative; z-index: 1; }
+    .hero-title { font-family: var(--font-brand); font-size: clamp(2.4rem, 5.4vw, 3.75rem); font-weight: 700; line-height: 1.08; letter-spacing: -.03em; margin-bottom: 22px; overflow-wrap: break-word; }
+    .hero-title .highlight { color: var(--accent); }
+    .hero-tn-logo { height: 1em; width: auto; vertical-align: -.14em; filter: brightness(0) invert(1); display: inline-block; margin: 0 6px; }
+    .hero-desc { font-size: 1.0625rem; color: var(--gray-2); max-width: 480px; margin-bottom: 32px; line-height: 1.7; }
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 28px; }
+    .hero-note { font-size: .8125rem; color: var(--gray-3); display: flex; align-items: center; gap: 8px; }
+    .hero-note::before { content: '✓'; color: var(--accent); font-weight: 700; }
+    .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+    .phone-frame {
+      background: #141414; border: 1px solid rgba(255,255,255,.1); border-radius: 28px; padding: 10px;
+      box-shadow: 0 40px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.04);
+      width: 100%; max-width: 300px; transform: rotate(-2deg); transition: transform .5s ease;
+    }
+    .phone-frame:hover { transform: rotate(0deg); }
+    .phone-frame img { border-radius: 20px; }
+    .phone-badge {
+      position: absolute; bottom: -14px; right: -10px;
+      background: var(--accent); color: #000; font-family: var(--font-brand); font-weight: 700;
+      font-size: .8rem; padding: 10px 16px; border-radius: var(--radius-sm);
+      box-shadow: 0 8px 24px rgba(200,241,53,.35);
+    }
+
+    /* ── MARQUEE STRIP ── */
+    .marquee-strip { overflow: hidden; background: var(--accent); padding: 11px 0; }
+    .marquee-track { display: flex; animation: marquee 30s linear infinite; width: max-content; }
+    .marquee-item { color: #000; font-weight: 700; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; padding: 0 24px; white-space: nowrap; }
+    .marquee-sep { color: rgba(0,0,0,.3); display: flex; align-items: center; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── PROBLEMA ── */
+    .problema-section { text-align: center; }
+    .problema-section .section-header { margin-bottom: 0; }
+    .problema-section .container { max-width: 780px; }
+
+    /* ── ANTES/DESPUÉS ── */
+    .transform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .transform-col { padding: 36px 32px; }
+    .transform-col.before { background: var(--bg); }
+    .transform-col.after { background: var(--bg-card); }
+    .transform-header { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+    .th-label { font-family: var(--font-brand); font-size: .9rem; font-weight: 700; }
+    .transform-col.before .th-label { color: var(--gray-3); }
+    .transform-col.after .th-label { color: var(--accent); }
+    .transform-list { display: flex; flex-direction: column; gap: 14px; }
+    .transform-item { display: flex; align-items: flex-start; gap: 10px; font-size: .875rem; line-height: 1.55; }
+    .transform-col.before .transform-item { color: var(--gray-3); }
+    .transform-col.after .transform-item { color: var(--gray-1); }
+    .t-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+    .transform-col.before .t-dot { background: var(--gray-3); }
+    .transform-col.after .t-dot { background: var(--accent); }
+
+    /* ── PILARES ── */
+    .pilares-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .pilar-card { background: var(--bg-card); padding: 36px 28px; transition: background var(--transition); position: relative; overflow: hidden; }
+    .pilar-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); transform: scaleX(0); transform-origin: left; transition: transform var(--transition); }
+    .pilar-card:hover { background: var(--bg-hover); }
+    .pilar-card:hover::before { transform: scaleX(1); }
+    .pilar-icon { width: 48px; height: 48px; background: var(--accent-dim); border: 1px solid rgba(200,241,53,.3); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 20px; }
+    .pilar-title { font-family: var(--font-brand); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -.01em; }
+    .pilar-desc { font-size: .875rem; color: var(--gray-2); line-height: 1.7; }
+
+    /* ── WIDGETS SHOWCASE (carrousel ilustrativo) ── */
+    .widgets-section { background: var(--bg-card); }
+    .widgets-carousel-wrap { overflow: hidden; margin: 0 -24px; padding: 8px 0; }
+    .widgets-carousel-track { display: flex; gap: 20px; width: max-content; animation: widgetsMarquee 42s linear infinite; padding: 0 24px; }
+    .widgets-carousel-track:hover { animation-play-state: paused; }
+    @keyframes widgetsMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .wcard { background: #fff; color: #17181a; border-radius: 16px; padding: 20px; box-shadow: 0 20px 44px rgba(0,0,0,.4); flex-shrink: 0; width: 228px; font-family: var(--font-main); }
+    .wcard-label { font-size: .72rem; font-weight: 700; color: #666; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+
+    .wcard-mini-table { border: 1px solid #ececec; border-radius: 8px; overflow: hidden; font-size: .66rem; }
+    .wcard-mini-row { display: flex; padding: 6px 8px; border-top: 1px solid #ececec; }
+    .wcard-mini-row:first-child { border-top: none; background: #f6f6f6; font-weight: 700; }
+    .wcard-mini-row span { flex: 1; }
+
+    .wcard-progress-bar { height: 8px; border-radius: 6px; background: #ececec; overflow: hidden; margin: 22px 0 10px; }
+    .wcard-progress-fill { height: 100%; background: var(--accent); border-radius: 6px; }
+    .wcard-progress-label { font-size: .68rem; color: #555; line-height: 1.5; }
+
+    .wcard-img { height: 320px; width: auto; border-radius: 16px; box-shadow: 0 20px 44px rgba(0,0,0,.4); flex-shrink: 0; display: block; }
+
+    /* ── RESULTADOS ── */
+
+    /* ── MARCAS ── */
+    .marcas-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 20px; }
+    .marca-badge { background: #fff; border-radius: var(--radius-sm); padding: 14px 26px; height: 64px; width: 180px; display: flex; align-items: center; justify-content: center; }
+    .marca-badge img { max-height: 100%; max-width: 100%; width: auto; height: auto; object-fit: contain; }
+
+    /* ── TIENDAS TRABAJADAS ── */
+    .tiendas-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .tienda-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--transition), transform var(--transition); display: flex; flex-direction: column; height: 100%; }
+    .tienda-card:hover { border-color: rgba(200,241,53,.3); transform: translateY(-4px); }
+    .tienda-shot { background: #fff; overflow: hidden; height: 150px; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .tienda-shot img { width: auto; height: auto; max-width: 75%; max-height: 75%; object-fit: contain; }
+    .tienda-card-body { padding: 18px 20px; display: flex; flex-direction: column; flex: 1; }
+    .tienda-card-name { font-family: var(--font-brand); font-weight: 700; font-size: .95rem; margin-bottom: 4px; }
+    .tienda-card-rubro { font-size: .72rem; color: var(--gray-3); margin-bottom: 10px; line-height: 1.5; flex: 1; }
+    .tienda-card-link { font-size: .78rem; color: var(--accent); font-weight: 600; }
+
+    /* ── TESTIMONIOS ── */
+    .testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .testi-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px 26px; display: flex; flex-direction: column; gap: 16px; }
+    .testi-platform-badge {
+      width: 44px; height: 44px; flex-shrink: 0; align-self: flex-start;
+      background: rgba(255,255,255,.92); border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .testi-platform-badge img { height: 24px; width: auto; max-width: 32px; object-fit: contain; }
+    .testi-stars { display: flex; align-items: center; gap: 8px; }
+    .testi-stars .stars { color: #FFD700; font-size: 1rem; letter-spacing: 2px; }
+    .testi-stars .rating { font-size: .8rem; font-weight: 700; color: var(--gray-2); }
+    .testi-quote { font-size: .9rem; color: var(--gray-1); line-height: 1.7; font-style: italic; flex: 1; }
+    .testi-author { border-top: 1px solid var(--border); padding-top: 14px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+    .testi-name { font-weight: 700; font-size: .875rem; }
+    .testi-context { font-size: .78rem; color: var(--gray-3); margin-top: 2px; }
+    .testi-link { font-size: .75rem; color: var(--accent); font-weight: 600; white-space: nowrap; }
+
+    /* ── PRECIO ── */
+    .precio-section { background: var(--bg-card); }
+    .precio-inner { max-width: 640px; margin: 0 auto; }
+    .precio-card { background: var(--bg); border: 1px solid rgba(200,241,53,.25); border-radius: var(--radius); padding: 48px; text-align: center; position: relative; overflow: hidden; }
+    .precio-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,241,53,.07) 0%, transparent 60%); }
+    .precio-card-content { position: relative; z-index: 1; }
+    .precio-badge { display: inline-block; background: var(--accent); color: #000; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; }
+    .precio-label { font-size: .875rem; color: var(--gray-2); margin-bottom: 8px; }
+    .precio-num { font-family: var(--font-brand); font-size: clamp(2.4rem, 6vw, 3.5rem); font-weight: 800; line-height: 1; letter-spacing: -.03em; margin-bottom: 6px; }
+    .precio-num span { color: var(--accent); }
+    .precio-sub { font-size: .8125rem; color: var(--gray-2); margin-bottom: 32px; }
+    .precio-features { display: flex; flex-direction: column; gap: 12px; text-align: left; margin-bottom: 32px; }
+    .precio-feature { display: flex; align-items: flex-start; gap: 12px; font-size: .9rem; color: var(--gray-1); line-height: 1.5; }
+    .precio-feature::before { content: '✓'; color: var(--accent); font-weight: 800; flex-shrink: 0; }
+    .precio-tool-note { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; text-align: left; font-size: .8125rem; color: var(--gray-2); line-height: 1.6; margin-bottom: 32px; }
+    .precio-tool-note strong { color: var(--gray-1); }
+    .precio-cta { width: 100%; justify-content: center; margin-bottom: 16px; }
+    .precio-note { font-size: .8rem; color: var(--gray-3); }
+
+    /* ── PROCESO ── */
+    .timeline { position: relative; max-width: 680px; margin: 0 auto; }
+    .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; left: 19px; width: 1px; background: var(--border); }
+    .timeline-item { display: flex; gap: 28px; margin-bottom: 40px; position: relative; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: .95rem; position: relative; z-index: 1; }
+    .timeline-body { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 26px; flex: 1; }
+    .timeline-phase { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .timeline-title { font-family: var(--font-brand); font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .timeline-desc { font-size: .85rem; color: var(--gray-2); line-height: 1.65; }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 2px; }
+    .faq-item { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; background: var(--bg-card); cursor: pointer; font-family: var(--font-brand); font-size: .9rem; font-weight: 600; color: var(--white); transition: background var(--transition); text-align: left; border: none; }
+    .faq-question:hover { background: var(--bg-hover); }
+    .faq-question.active { background: var(--bg-hover); color: var(--accent); }
+    .faq-arrow { width: 18px; height: 18px; flex-shrink: 0; transition: transform var(--transition); color: var(--gray-2); }
+    .faq-question.active .faq-arrow { transform: rotate(180deg); color: var(--accent); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .4s ease; background: var(--bg-hover); }
+    .faq-answer.open { max-height: 260px; }
+    .faq-answer-inner { padding: 0 24px 20px; font-size: .875rem; color: var(--gray-2); line-height: 1.7; }
+
+    /* ── CTA FINAL ── */
+    .cta-final { padding: 100px 0; text-align: center; background: radial-gradient(ellipse 70% 70% at 50% 100%, rgba(200,241,53,.08) 0%, transparent 70%), var(--bg); }
+    .cta-final-title { font-family: var(--font-brand); font-size: clamp(1.9rem, 4.6vw, 3rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.15; margin-bottom: 16px; }
+    .cta-final-title span { color: var(--accent); }
+    .cta-final-sub { font-size: 1rem; color: var(--gray-2); max-width: 440px; margin: 0 auto 36px; line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; }
+    .footer-logo img { height: 26px; width: auto; }
+    .footer-logo-text { font-family: var(--font-brand); font-weight: 800; font-size: .9rem; }
+    .footer-logo-text span { color: var(--accent); }
+    .footer-copy { font-size: .8rem; color: var(--gray-3); }
+    .footer-link { font-size: .8rem; color: var(--gray-3); transition: color var(--transition); }
+    .footer-link:hover { color: var(--accent); }
+
+    /* ── MOBILE STICKY CTA ── */
+    .mobile-sticky { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 800; background: rgba(10,10,10,.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border); padding: 14px 20px; }
+    @media (max-width: 768px) { .mobile-sticky { display: flex; } body { padding-bottom: 76px; } }
+    .mobile-sticky .btn-wa { width: 100%; justify-content: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { order: -1; }
+      .phone-frame { max-width: 240px; margin: 0 auto; }
+      .tiendas-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 64px 0; }
+      .hero { padding: 100px 0 40px; min-height: auto; }
+      .nav-links { display: none !important; }
+      .nav-logo-text { display: none; }
+      .hamburger { display: flex; }
+      .transform-grid { grid-template-columns: 1fr; }
+      .pilares-grid { grid-template-columns: 1fr; }
+      .tiendas-grid { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .precio-card { padding: 32px 24px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .section-title { font-size: 1.5rem; }
+      .section-subtitle { font-size: .9rem; }
+    }
+    @media (max-width: 480px) {
+      .tag { font-size: .62rem; padding: 5px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.png" alt="Nueva Idea MKT logo" />
+        <span class="nav-logo-text">NUEVA IDEA <span>MKT</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#widgets">Qué incluye</a></li>
+        <li><a href="#precio">Precio</a></li>
+      </ul>
+      <a href="https://wa.me/541161645759?text=Hola%20Mati!%20Vi%20la%20landing%20de%20optimizaci%C3%B3n%20de%20Tienda%20Nube%20y%20quiero%20cotizar%20para%20mi%20tienda." target="_blank" rel="noopener" class="btn btn-wa" style="padding:10px 20px;font-size:.8125rem;">
+        <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Hablar por WhatsApp
+      </a>
+      <div class="hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#widgets" onclick="closeMobile()">Qué incluye</a>
+      <a href="#precio" onclick="closeMobile()">Precio</a>
+      <a href="https://wa.me/541161645759?text=Hola%20Mati!%20Vi%20la%20landing%20de%20optimizaci%C3%B3n%20de%20Tienda%20Nube%20y%20quiero%20cotizar%20para%20mi%20tienda." target="_blank" rel="noopener" class="menu-wa" onclick="closeMobile()">Hablar por WhatsApp</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="reveal" style="margin-bottom:18px;"><span class="tag">Servicio exclusivo · Tienda Nube</span></div>
+          <h1 class="hero-title reveal reveal-delay-1">Tu <img class="hero-tn-logo" src="assets/platforms/tiendanubelargo.svg" alt="Tienda Nube" />,<br><span class="highlight">diseñada para vender</span></h1>
+          <p class="hero-desc reveal reveal-delay-2">Optimizamos el diseño, sumamos widgets de conversión y activamos automatizaciones — todo a medida de lo que necesite tu marca. Partner oficial de la herramienta que potencia cada widget.</p>
+          <div class="hero-actions reveal reveal-delay-3">
+            <a href="https://wa.me/541161645759?text=Hola%20Mati!%20Vi%20la%20landing%20de%20optimizaci%C3%B3n%20de%20Tienda%20Nube%20y%20quiero%20cotizar%20para%20mi%20tienda." target="_blank" rel="noopener" class="btn btn-wa">
+              <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Quiero esto para mi tienda
+            </a>
+            <a href="#widgets" class="btn btn-outline">Ver qué incluye ↓</a>
+          </div>
+          <p class="hero-note reveal reveal-delay-4">Sin costo fijo mensual con nosotros — pago único por la implementación</p>
+        </div>
+        <div class="hero-visual reveal reveal-delay-2">
+          <div class="phone-frame">
+            <img src="assets/screenshots/mobile/hero-trademark.jpg" alt="Home de TradeMark SA optimizada" />
+          </div>
+          <div class="phone-badge">Tienda real · en producción</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span class="marquee-item">Partner oficial de la herramienta</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">Diseño + Widgets + Automatizaciones</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">Pago único, sin letra chica</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">Resultados medibles</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">Tiendas reales, resultados reales</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">7-10 días hábiles</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">Partner oficial de la herramienta</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">Diseño + Widgets + Automatizaciones</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">Pago único, sin letra chica</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">Resultados medibles</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">Tiendas reales, resultados reales</span><span class="marquee-sep">·</span>
+      <span class="marquee-item">7-10 días hábiles</span><span class="marquee-sep">·</span>
+    </div>
+  </div>
+
+  <!-- EL PROBLEMA -->
+  <section class="section problema-section">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center;align-items:center;display:flex;flex-direction:column;">
+        <span class="tag">El problema</span>
+        <h2 class="section-title">Tenés visitas, pero no<br>vendés lo que deberías</h2>
+        <p class="section-subtitle" style="text-align:center;">La mayoría de las tiendas en Tienda Nube usan el diseño de fábrica: sin elementos que resuelvan dudas, sin urgencia, sin nada que empuje al "agregar al carrito". El tráfico entra y se va sin comprar — no por el producto, sino por la experiencia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANTES / DESPUÉS -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="transform-grid">
+        <div class="transform-col before reveal">
+          <div class="transform-header"><span class="th-label">❌ &nbsp;Tienda sin optimizar</span></div>
+          <div class="transform-list">
+            <div class="transform-item"><span class="t-dot"></span><span>Sin tabla de talles ni guías — el comprador se va a preguntar por WhatsApp o directamente abandona</span></div>
+            <div class="transform-item"><span class="t-dot"></span><span>Sin productos complementarios sugeridos — cada venta se queda en un solo producto</span></div>
+            <div class="transform-item"><span class="t-dot"></span><span>Sin sensación de urgencia o stock limitado — nada empuja a decidir ahora</span></div>
+            <div class="transform-item"><span class="t-dot"></span><span>Sin reseñas visibles en el producto — el comprador duda y se va a comparar a otro lado</span></div>
+            <div class="transform-item"><span class="t-dot"></span><span>El carrito abandonado se pierde para siempre, sin ningún intento de recuperarlo</span></div>
+          </div>
+        </div>
+        <div class="transform-col after reveal reveal-delay-1">
+          <div class="transform-header"><span class="th-label">✅ &nbsp;Tienda optimizada</span></div>
+          <div class="transform-list">
+            <div class="transform-item"><span class="t-dot"></span><span>Cada producto responde las dudas antes de que aparezcan: talles, medidas, videos</span></div>
+            <div class="transform-item"><span class="t-dot"></span><span>El carrito crece solo con recomendaciones y bundles pensados para cada categoría</span></div>
+            <div class="transform-item"><span class="t-dot"></span><span>Ofertas por tiempo limitado y stock bajo que generan una decisión de compra real</span></div>
+            <div class="transform-item"><span class="t-dot"></span><span>Reseñas con fotos reales en cada ficha — confianza antes de pagar</span></div>
+            <div class="transform-item"><span class="t-dot"></span><span>Automatizaciones que van a buscar al que no volvió, todos los días, solas</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILARES -->
+  <section class="section" style="background:var(--bg-card);">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center;align-items:center;display:flex;flex-direction:column;">
+        <span class="tag">Qué optimizamos</span>
+        <h2 class="section-title">No es solo instalar widgets</h2>
+        <p class="section-subtitle" style="text-align:center;">Evaluamos tu tienda entera y armamos un plan a medida — puede ser un ajuste puntual o una intervención completa. Depende de lo que tu marca necesite.</p>
+      </div>
+      <div class="pilares-grid">
+        <div class="pilar-card reveal">
+          <div class="pilar-icon">🎨</div>
+          <h3 class="pilar-title">Diseño y estructura</h3>
+          <p class="pilar-desc">Home, banners, categorías y navegación pensados para que el cliente encuentre lo que busca sin fricción.</p>
+        </div>
+        <div class="pilar-card reveal reveal-delay-1">
+          <div class="pilar-icon">⚡</div>
+          <h3 class="pilar-title">Widgets de conversión</h3>
+          <p class="pilar-desc">Urgencia, tallas, videos, reseñas y más — instalados y configurados a medida de tu catálogo real.</p>
+        </div>
+        <div class="pilar-card reveal reveal-delay-2">
+          <div class="pilar-icon">🔄</div>
+          <h3 class="pilar-title">Automatizaciones</h3>
+          <p class="pilar-desc">Recuperación de carritos abandonados, bienvenida y post-compra, funcionando solas todos los días.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDGETS EN ACCIÓN -->
+  <section class="section widgets-section" id="widgets">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="tag">Qué podés sumar</span>
+        <h2 class="section-title">Un catálogo de funcionalidades,<br>pensado por objetivo</h2>
+        <p class="section-subtitle">Estos son ejemplos ilustrativos del tipo de widgets que instalamos. Las capturas reales de nuestros clientes están un poco más abajo, en "Tiendas ya trabajadas".</p>
+      </div>
+    </div>
+
+    <div class="widgets-carousel-wrap reveal">
+      <div class="widgets-carousel-track">
+
+        <div class="wcard">
+          <div class="wcard-label">📏 Guía de talles</div>
+          <div class="wcard-mini-table">
+            <div class="wcard-mini-row"><span>Talle</span><span>Busto</span><span>Cadera</span></div>
+            <div class="wcard-mini-row"><span>S</span><span>85cm</span><span>90cm</span></div>
+            <div class="wcard-mini-row"><span>M</span><span>90cm</span><span>96cm</span></div>
+            <div class="wcard-mini-row"><span>L</span><span>95cm</span><span>102cm</span></div>
+          </div>
+        </div>
+
+        <div class="wcard">
+          <div class="wcard-label">🚚 Envío gratis progresivo</div>
+          <div class="wcard-progress-bar"><div class="wcard-progress-fill" style="width:70%;"></div></div>
+          <p class="wcard-progress-label">Te faltan <strong>$8.500</strong> para envío gratis</p>
+        </div>
+
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/notificaciones.webp" alt="Notificaciones de urgencia" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/resenas.webp" alt="Reseñas con calificación" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/lleva-mas.webp" alt="Descuento por cantidad" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/packs.webp" alt="Armá tu pack" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/productos-complementarios.webp" alt="Productos complementarios" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/slider-videos.webp" alt="Slider de videos de producto" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/antes-despues.webp" alt="Comparador antes y después" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/ruleta.webp" alt="Ruleta de descuentos" />
+
+        <!-- duplicado para el loop infinito -->
+        <div class="wcard">
+          <div class="wcard-label">📏 Guía de talles</div>
+          <div class="wcard-mini-table">
+            <div class="wcard-mini-row"><span>Talle</span><span>Busto</span><span>Cadera</span></div>
+            <div class="wcard-mini-row"><span>S</span><span>85cm</span><span>90cm</span></div>
+            <div class="wcard-mini-row"><span>M</span><span>90cm</span><span>96cm</span></div>
+            <div class="wcard-mini-row"><span>L</span><span>95cm</span><span>102cm</span></div>
+          </div>
+        </div>
+
+        <div class="wcard">
+          <div class="wcard-label">🚚 Envío gratis progresivo</div>
+          <div class="wcard-progress-bar"><div class="wcard-progress-fill" style="width:70%;"></div></div>
+          <p class="wcard-progress-label">Te faltan <strong>$8.500</strong> para envío gratis</p>
+        </div>
+
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/notificaciones.webp" alt="Notificaciones de urgencia" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/resenas.webp" alt="Reseñas con calificación" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/lleva-mas.webp" alt="Descuento por cantidad" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/packs.webp" alt="Armá tu pack" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/productos-complementarios.webp" alt="Productos complementarios" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/slider-videos.webp" alt="Slider de videos de producto" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/antes-despues.webp" alt="Comparador antes y después" />
+        <img class="wcard-img" src="assets/screenshots/wigy-widgets/ruleta.webp" alt="Ruleta de descuentos" />
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TIENDAS TRABAJADAS -->
+  <section class="section" style="background:var(--bg-card);">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center;align-items:center;display:flex;flex-direction:column;">
+        <span class="tag">Tiendas ya trabajadas</span>
+        <h2 class="section-title">Entrá y comprobalo vos mismo</h2>
+        <p class="section-subtitle" style="text-align:center;">Cada tienda es real y está en producción hoy. Click y la ves con tus propios ojos.</p>
+      </div>
+      <div class="tiendas-grid">
+        <div class="tienda-card reveal">
+          <div class="tienda-shot"><img src="assets/clients/open25hs.png" alt="Open 25 HS" /></div>
+          <div class="tienda-card-body">
+            <h4 class="tienda-card-name">Open25hs!</h4>
+            <p class="tienda-card-rubro">Consumo masivo · cadena de kioscos más grande de Argentina, envíos a todo el país</p>
+            <a href="https://www.tienda.open25.com.ar" target="_blank" rel="noopener" class="tienda-card-link">Ver tienda →</a>
+          </div>
+        </div>
+        <div class="tienda-card reveal reveal-delay-1">
+          <div class="tienda-shot"><img src="assets/clients/trademark.webp" alt="TradeMark SA" /></div>
+          <div class="tienda-card-body">
+            <h4 class="tienda-card-name">TradeMark SA</h4>
+            <p class="tienda-card-rubro">Fabricante e importador · indumentaria para sublimar, estampar y bordar. Acá se rediseñó la tienda entera.</p>
+            <a href="https://trademarksa.com.ar/" target="_blank" rel="noopener" class="tienda-card-link">Ver tienda →</a>
+          </div>
+        </div>
+        <div class="tienda-card reveal reveal-delay-2">
+          <div class="tienda-shot"><img src="assets/clients/oasis.png" alt="Farmacia Oasis" /></div>
+          <div class="tienda-card-body">
+            <h4 class="tienda-card-name">Farmacia Oasis</h4>
+            <p class="tienda-card-rubro">Farmacia · creación y venta de productos propios</p>
+            <a href="https://www.farmaciaoasis.com.ar/" target="_blank" rel="noopener" class="tienda-card-link">Ver tienda →</a>
+          </div>
+        </div>
+        <div class="tienda-card reveal reveal-delay-3">
+          <div class="tienda-shot"><img src="assets/clients/dindan.png" alt="DinDan" /></div>
+          <div class="tienda-card-body">
+            <h4 class="tienda-card-name">DinDan</h4>
+            <p class="tienda-card-rubro">Indumentaria · mallas y trajes de baño. Acá optimizamos solo la landing de producto, no la tienda entera.</p>
+            <a href="https://www.dindanmallas.com.ar/" target="_blank" rel="noopener" class="tienda-card-link">Ver tienda →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section" style="text-align:center; padding-top:64px; padding-bottom:64px;">
+    <div class="container">
+      <p class="section-subtitle reveal" style="margin:0 auto 28px;text-align:center;">Partners oficiales</p>
+      <div class="marcas-row reveal">
+        <div class="marca-badge"><img src="assets/certs/tiendanube.png" alt="Tienda Nube Partners" /></div>
+        <div class="marca-badge"><img src="assets/platforms/wigy.png" alt="WIGY - Partner oficial" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center;align-items:center;display:flex;flex-direction:column;">
+        <span class="tag">Lo dicen ellos</span>
+        <h2 class="section-title">No lo decimos nosotros</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="testi-platform-badge"><img src="assets/platforms/tiendanube.png" alt="Tienda Nube" /></div>
+          <div class="testi-stars"><span class="stars">★★★★★</span><span class="rating">5/5</span></div>
+          <p class="testi-quote">"No solo nos instaló widgets — nos rediseñó la tienda entera. Hoy tenemos una web que representa lo que somos como fabricantes, con una barra de envío gratis y un comparador de confianza que ayudan a cerrar la venta antes de que el cliente dude."</p>
+          <div class="testi-author">
+            <div><p class="testi-name">Federico M.</p><p class="testi-context">Jefe de Ventas · TradeMark SA</p></div>
+            <a href="https://trademarksa.com.ar/" target="_blank" rel="noopener" class="testi-link">Ver tienda →</a>
+          </div>
+        </div>
+        <div class="testi-card reveal reveal-delay-1">
+          <div class="testi-platform-badge"><img src="assets/platforms/tiendanube.png" alt="Tienda Nube" /></div>
+          <div class="testi-stars"><span class="stars">★★★★★</span><span class="rating">5/5</span></div>
+          <p class="testi-quote">"Necesitábamos que la web no solo se viera bien, sino que vendiera más. Con la optimización y los widgets que sumó, la conversión y la facturación online crecieron, y hoy nuestros clientes navegan la farmacia sin fricciones."</p>
+          <div class="testi-author">
+            <div><p class="testi-name">Silvia</p><p class="testi-context">Dueña / Farmacéutica · Farmacia Oasis</p></div>
+            <a href="https://www.farmaciaoasis.com.ar/" target="_blank" rel="noopener" class="testi-link">Ver tienda →</a>
+          </div>
+        </div>
+        <div class="testi-card reveal reveal-delay-2">
+          <div class="testi-platform-badge"><img src="assets/platforms/tiendanube.png" alt="Tienda Nube" /></div>
+          <div class="testi-stars"><span class="stars">★★★★★</span><span class="rating">5/5</span></div>
+          <p class="testi-quote">"Con los widgets que nos implementó la tienda dejó de sentirse como una vidriera estática. Reseñas, envío gratis progresivo, hasta la ruleta de descuentos — todo suma, y se nota mes a mes en la facturación."</p>
+          <div class="testi-author">
+            <div><p class="testi-name">Franco F.</p><p class="testi-context">Head of Online Sales · Open25hs!</p></div>
+            <a href="https://www.tienda.open25.com.ar" target="_blank" rel="noopener" class="testi-link">Ver tienda →</a>
+          </div>
+        </div>
+        <div class="testi-card reveal reveal-delay-3">
+          <div class="testi-platform-badge"><img src="assets/platforms/tiendanube.png" alt="Tienda Nube" /></div>
+          <div class="testi-stars"><span class="stars">★★★★★</span><span class="rating">5/5</span></div>
+          <p class="testi-quote">"Nos optimizó la web y sumó widgets que hoy son parte natural del proceso de compra. La conversión y la facturación de la tienda subieron, y la experiencia de compra para el cliente mejoró un montón. Se nota que entendió el negocio desde el día uno."</p>
+          <div class="testi-author">
+            <div><p class="testi-name">Tomás A.</p><p class="testi-context">Fundador · DinDan</p></div>
+            <a href="https://www.dindanmallas.com.ar/" target="_blank" rel="noopener" class="testi-link">Ver tienda →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRECIO -->
+  <section class="section precio-section" id="precio">
+    <div class="container">
+      <div class="precio-inner">
+        <div class="precio-card reveal">
+          <div class="precio-card-content">
+            <span class="precio-badge">Pack de optimización</span>
+            <p class="precio-label">Implementación a medida de tu tienda</p>
+            <p class="precio-num">Desde <span>$390.000</span></p>
+            <p class="precio-sub">Pago único · sin renovación mensual con nosotros</p>
+            <div class="precio-features">
+              <div class="precio-feature">Diagnóstico completo de tu tienda antes de empezar</div>
+              <div class="precio-feature">Diseño, widgets y automatizaciones según lo que tu marca necesite</div>
+              <div class="precio-feature">Implementación en 7-10 días hábiles</div>
+              <div class="precio-feature">Vos quedás con acceso propio para seguir usándolo</div>
+              <div class="precio-feature">Canal abierto para consultas puntuales después de la entrega</div>
+            </div>
+            <div class="precio-tool-note"><strong>Una aclaración importante:</strong> el $390.000 es una referencia — cada tienda se cotiza de forma particular según el rubro, la cantidad de artículos y las horas de trabajo que implique. Lo que sí es fijo: nuestra implementación es un <strong>pago único</strong>. Lo único que queda como suscripción mensual es la herramienta de visualización (el dashboard de widgets), independiente de este servicio.</div>
+            <a href="https://wa.me/541161645759?text=Hola%20Mati!%20Vi%20la%20landing%20de%20optimizaci%C3%B3n%20de%20Tienda%20Nube%20y%20quiero%20cotizar%20para%20mi%20tienda." target="_blank" rel="noopener" class="btn btn-wa precio-cta">
+              <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Quiero cotizar mi tienda
+            </a>
+            <p class="precio-note">Respuesta directa de Mati — sin formularios ni esperas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center;align-items:center;display:flex;flex-direction:column;">
+        <span class="tag">Proceso</span>
+        <h2 class="section-title">De tu mensaje a la tienda<br>funcionando</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot">💬</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 01</div>
+            <h3 class="timeline-title">Nos escribís por WhatsApp</h3>
+            <p class="timeline-desc">Nos contás tu tienda y qué te gustaría mejorar — sin costo, sin compromiso.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-1">
+          <div class="timeline-dot">📋</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 02</div>
+            <h3 class="timeline-title">Propuesta a medida</h3>
+            <p class="timeline-desc">Analizamos tu tienda y te mandamos una propuesta con alcance y precio cerrado, sin letra chica.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-2">
+          <div class="timeline-dot">⚙️</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 03</div>
+            <h3 class="timeline-title">Implementación</h3>
+            <p class="timeline-desc">7-10 días hábiles desde que recibimos accesos y materiales. Vos seguís vendiendo mientras trabajamos.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-3">
+          <div class="timeline-dot">🚀</div>
+          <div class="timeline-body">
+            <div class="timeline-phase">Paso 04</div>
+            <h3 class="timeline-title">Tienda funcionando</h3>
+            <p class="timeline-desc">Quedás con acceso propio y un canal abierto para consultas puntuales cuando lo necesites.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="background:var(--bg-card);">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center;align-items:center;display:flex;flex-direction:column;">
+        <span class="tag">Preguntas frecuentes</span>
+        <h2 class="section-title">Antes de escribirnos</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            ¿Tengo que pagar algo mensual a Nueva Idea MKT?
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">No. Nuestra implementación es pago único. La herramienta que potencia los widgets sí tiene su propio costo mensual, independiente de nosotros — te lo mostramos con precisión antes de arrancar.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            ¿Qué necesito para arrancar?
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">Acceso administrador a tu Tienda Nube, y según los widgets que sumemos: fotos, videos o tablas de talle de tus productos. Te decimos exactamente qué hace falta en la propuesta.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            ¿Cuánto tarda la implementación?
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">7 a 10 días hábiles desde que recibimos los accesos y materiales, para un proyecto completo. Si es un ajuste puntual sobre una tienda ya optimizada, puede ser mucho más rápido.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Ya tengo mi tienda armada, ¿puedo sumar solo algunos widgets?
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">Sí. El pack se adapta al alcance real que necesites — desde sumar 2-3 widgets puntuales hasta una optimización completa de diseño, widgets y automatizaciones.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            ¿Sirve para cualquier rubro?
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">Sí — ya lo aplicamos en consumo masivo, indumentaria, farmacia y fabricantes/importadores. Los widgets se eligen según lo que tu catálogo necesite, no es una plantilla única.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="container">
+      <h2 class="cta-final-title reveal">¿Listo para vender más<br>con tu <span>Tienda Nube</span>?</h2>
+      <p class="cta-final-sub reveal reveal-delay-1">Escribinos ahora y te respondemos directo — sin formularios, sin vueltas.</p>
+      <div class="reveal reveal-delay-2">
+        <a href="https://wa.me/541161645759?text=Hola%20Mati!%20Vi%20la%20landing%20de%20optimizaci%C3%B3n%20de%20Tienda%20Nube%20y%20quiero%20cotizar%20para%20mi%20tienda." target="_blank" rel="noopener" class="btn btn-wa">
+          <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Quiero esto para mi tienda
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="assets/logo.png" alt="Nueva Idea MKT" />
+        <span class="footer-logo-text">NUEVA IDEA <span>MKT</span></span>
+      </div>
+      <p class="footer-copy">© 2026 Nueva Idea MKT · <a href="index.html" class="footer-link">nuevaideamkt.com</a></p>
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY CTA -->
+  <div class="mobile-sticky">
+    <a href="https://wa.me/541161645759?text=Hola%20Mati!%20Vi%20la%20landing%20de%20optimizaci%C3%B3n%20de%20Tienda%20Nube%20y%20quiero%20cotizar%20para%20mi%20tienda." target="_blank" rel="noopener" class="btn btn-wa">
+      <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Quiero esto para mi tienda
+    </a>
+  </div>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', (e) => { e.stopPropagation(); mobileMenu.classList.toggle('open'); });
+    function closeMobile() { mobileMenu.classList.remove('open'); }
+    document.addEventListener('click', (e) => { if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMobile(); });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+      });
+    });
+
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.contains('open');
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-question').forEach(b => b.classList.remove('active'));
+      if (!isOpen) { answer.classList.add('open'); btn.classList.add('active'); }
+    }
+  </script>
+</body>
+</html>
