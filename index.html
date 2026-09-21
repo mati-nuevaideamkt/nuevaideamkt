@@ -354,6 +354,8 @@
     }
     .mobile-menu .menu-meet:hover { background: #d9ff3d; }
 
+    .course-strip-break { display: none; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 768px) {
@@ -375,6 +377,9 @@
       .case-service-tag { padding: 3px 7px; font-size: .6rem; letter-spacing: .02em; }
       .footer-inner { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; text-align: center; }
+      .course-strip-text { font-size: .85rem; }
+      .course-strip-dash { display: none; }
+      .course-strip-break { display: inline; }
     }
     @media (max-width: 480px) {
       .hero-title { font-size: 2.4rem; }
@@ -626,6 +631,13 @@
           </div>
         </div>
 
+      </div>
+
+      <div class="course-strip" style="margin: 0 0 48px; border-radius: var(--radius-sm); padding: 16px 24px;">
+        <div class="course-strip-inner">
+          <p class="course-strip-text"><strong>Nuevo: Tu Tienda Nube lista para vender.</strong><span class="course-strip-dash"> — </span><br class="course-strip-break">Diseño + widgets + automatizaciones</p>
+          <a href="/tienda-nube-disenada-para-vender" class="course-strip-link">Ir a ver →</a>
+        </div>
       </div>
 
       <div class="testi-subhead reveal">
